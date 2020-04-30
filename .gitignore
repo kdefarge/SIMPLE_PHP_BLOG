@@ -1,2 +1,4 @@
 .vscode/
-/vendor/
+vendor/
+public/css/*.min.css
+public/script/*.min.js

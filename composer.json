@@ -11,5 +11,8 @@
             "name": "Kevin DEFARGE",
             "email": "1819360+kdefarge@users.noreply.github.com"
         }
-    ]
+    ],
+    "scripts": {
+        "post-install-cmd": ["php composer_install_script.php"]
+    }
 }
