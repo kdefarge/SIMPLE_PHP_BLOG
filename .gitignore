@@ -1,5 +1,5 @@
 .vscode/
 vendor/
-public/css/*.min.css
+public/css/
 public/script/*.min.js
 app/cache/

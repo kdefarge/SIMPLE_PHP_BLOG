@@ -14,7 +14,7 @@ $files =  [
         "vendor/twbs/bootstrap/dist/css/",
         "public/css/"
     ],
-    "bootstrap.min.js" => [
+    "bootstrap.bundle.min.js" => [
         "vendor/twbs/bootstrap/dist/js/",
         "public/script/"
     ]

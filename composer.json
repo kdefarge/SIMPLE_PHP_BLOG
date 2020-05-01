@@ -13,6 +13,9 @@
         }
     ],
     "scripts": {
-        "post-install-cmd": ["php composer_install_script.php"]
+        "post-install-cmd": [
+            "sass sass:public/css/ --style=compressed --no-source-map",
+            "php composer_install_script.php"
+        ]
     }
 }
