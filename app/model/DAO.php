@@ -1,6 +1,6 @@
 <?php
 
-namespace app\DAO;
+namespace app\model;
 
 $DAO_LINK = null;
 $DAO_QUERY_COUNTER = 0;
