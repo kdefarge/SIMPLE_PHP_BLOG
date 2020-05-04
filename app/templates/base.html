@@ -11,7 +11,7 @@
         <link href="public/css/bootstrap.min.css" rel="stylesheet">
         <link href="public/css/base.css" rel="stylesheet">
 
-        <title>{% block title %}{% endblock %}</title>
+        <title>Blog - {% block title %}{% endblock %}</title>
     {% endblock %}
 </head>
 
@@ -29,6 +29,12 @@
                         <a class="nav-link" href="/?page=home">Home
                             <span class="sr-only">(current)</span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/?page=register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/?page=connect">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/?page=admin">Admin</a>

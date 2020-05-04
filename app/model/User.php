@@ -2,7 +2,7 @@
 
 namespace app\model;
 
-Class User
+class User
 {
     private $_userID;
     private $_name;

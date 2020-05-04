@@ -17,5 +17,11 @@
             "sass sass:public/css/ --style=compressed --no-source-map",
             "php composer_install_script.php"
         ]
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\model\\": "app/model/",
+            "app\\controller\\": "app/controller/"
+        }
     }
 }
