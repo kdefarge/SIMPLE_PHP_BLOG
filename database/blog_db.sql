@@ -1,13 +1,13 @@
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` INT NOT NULL AUTO_INCREMENT,
-  `user_name` VARCHAR(32) NOT NULL,
+  `name` VARCHAR(32) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `registered` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_admin` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX (`email`),
-  UNIQUE INDEX (`user_name`))
+  UNIQUE INDEX (`name`))
 ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `post` (

@@ -5,8 +5,9 @@ namespace app\model;
 Class User
 {
     private $_userID;
-    private $_userName;
+    private $_name;
     private $_email;
+    private $_password;
     private $_registered;
     private $_isAdmin;
 
@@ -20,14 +21,14 @@ Class User
         $this->_userID = $userID;
     }
 
-    public function GetUserName()
+    public function GetName()
     {
-        return $this->_userName;
+        return $this->_name;
     }
 
-    public function SetUserName($userName)
+    public function SetName($name)
     {
-        $this->_userName = $userName;
+        $this->_name = $name;
     }
 
     public function GetEmail()
@@ -38,6 +39,16 @@ Class User
     public function SetEmail($email)
     {
         $this->_email = $email;
+    }
+
+    public function GetPassword($password)
+    {
+        return $this->_password;
+    }
+
+    public function SetPassword($password)
+    {
+        $this->_password = $password;
     }
 
     public function GetRegistered()

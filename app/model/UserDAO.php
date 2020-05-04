@@ -4,61 +4,70 @@ namespace app\model;
 
 class UserDAO extends DAO
 {
-    const PW_PREFIX = "%3*";
-    const PW_SUFFIX = "@";
-
-    private function Password_hash($password)
+    
+    public function Create(User $user)
     {
-        return password_hash(self::PW_PREFIX.$password.Self::PW_SUFFIX, PASSWORD_BCRYPT);
+        $sql = 'INSERT INTO `user`(`name`, `email`, `password`, `is_admin`) VALUES (?, ?, ?, ?)';
+        $this->createQuery($sql, [
+                $user->GetUserName(),
+                $user->GetEmail(),
+                $user->GetPassword(),
+                $user->GetIsAdmin()
+            ]);
     }
 
-    private function Password_verify($password,$hash) 
+    public function Update(User $user)
     {
-        return password_verify(self::PW_PREFIX.$password.Self::PW_SUFFIX,$hash);
+        $sql = 'UPDATE `user` SET `name`=?,`email`=?,`password`=?, `is_admin`=? WHERE `user_id` = ?';
+
+        $this->createQuery($sql, [
+                $user->GetUserName(),
+                $user->GetEmail(),
+                $user->GetPassword(),
+                $user->GetIsAdmin(),
+                $user->GetID()
+            ]);
     }
 
-    public function create(User $user, $password)
-    {
-        $password = $this->Password_hash($password);
-
-        $sql = 'INSERT INTO `user`(`user_name`,`email`,`password`) VALUES (?, ?, ?)';
-        
-        $this->createQuery($sql, [$user->GetUserName(), $user->GetEmail(), $password]);
-    }
-
-    public function update(User $user, $password = null)
-    {
-        if(is_null($password))
-        {
-            $sql = 'UPDATE `user` SET `user_name`=?,`email`=? WHERE user_id=?';
-
-            $this->createQuery($sql, [$user->GetUserName(), $user->GetEmail(), $user->GetID()]);
-        }
-        else
-        {
-            $sql = 'UPDATE `user` SET `user_name`=?,`email`=?,`password`=? WHERE user_id=?';
-            
-            $password = $this->Password_hash($password);
-
-            $this->createQuery($sql, [$user->GetUserName(), $user->GetEmail(), $password, $user->GetID()]);
-        }
-        
-    }
-
-    public function delete(User $user)
+    public function Delete(User $user)
     {
         $sql = 'DELETE FROM `user` WHERE user_id = ?';
         $this->createQuery($sql, [$user->GetID()]);
     }
 
-    public function read_login(User $user, $password)
+    private function ReadBy($key, $value)
     {
-        $sql = 'SELECT `id`, `user_name`, `email`, `password`, `is_admin` FROM user WHERE pseudo = ?';
-        $password = $this->password($password);
-
-        $data = $this->createQuery($sql, [$post->get('pseudo')]);
+        $sql = 'SELECT `user_id`, `name`, `email`, `password`, `registered`, `is_admin` FROM user WHERE '.$key.' = ?';
+        $data = $this->createQuery($sql, [$value]);
+        
         $result = $data->fetch();
-        $isPasswordValid = password_verify($post->get('password'), $result['password']);
+        if(!$result)
+            return null;
+        
+        $user = new User();
+        $user->SetID(           $result['user_id']      );
+        $user->SetName(         $result['name']         );
+        $user->SetEmail(        $result['email']        );
+        $user->SetPassword(     $result['password']     );
+        $user->SetRegistered(   $result['registered']   );
+        $user->SetIsAdmin(      $result['is_admin']     );
+
+        return $user;
+    }
+
+    public function ReadByID($id)
+    {
+        return $this->ReadBy('user_id', $id);
+    }
+
+    public function ReadByName($name)
+    {
+        return $this->ReadBy('name', $name);
+    }
+
+    public function ReadByEmail($email)
+    {
+        return $this->ReadBy('email', $email);
     }
 }
 
