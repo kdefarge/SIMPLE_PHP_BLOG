@@ -6,15 +6,7 @@ use app\model\Controller;
 
 class Admin extends Controller
 {
-    public function MethodPost($post)
-    {
-
-    }
-
-    public function MethodGet($get)
-    {
-        $this->Template("admin");
-    }
+    public function MethodGet() : void { }
 }
 
 ?>

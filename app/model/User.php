@@ -2,71 +2,67 @@
 
 namespace app\model;
 
+use DateTime;
+
 class User
 {
-    private $_userID;
-    private $_name;
-    private $_email;
-    private $_password;
-    private $_registered;
-    private $_isAdmin;
+    private $_userID = 0;
+    private $_name = null;
+    private $_password = null;
+    private ?Datetime $_registered = null;
+    private $_isAdmin = false;
 
-    public function GetID()
+    public function GetID() : int
     {
         return $this->_userID;
     }
 
-    public function SetID($userID)
+    public function SetID(int $userID) : void
     {
-        $this->_userID = $userID;
+        $this->_userID = intval($userID);
     }
 
-    public function GetName()
+    public function GetName() : ?string
     {
         return $this->_name;
     }
 
-    public function SetName($name)
+    public function SetName(?string $name) : void
     {
         $this->_name = $name;
     }
 
-    public function GetEmail()
-    {
-        return $this->_email;
-    }
-
-    public function SetEmail($email)
-    {
-        $this->_email = $email;
-    }
-
-    public function GetPassword($password)
+    public function GetPassword() : ?string
     {
         return $this->_password;
     }
 
-    public function SetPassword($password)
+    public function SetPassword(?string $password) : void
     {
         $this->_password = $password;
     }
 
-    public function GetRegistered()
+    public function GetRegistered() : ?DateTime
     {
         return $this->_registered;
     }
 
-    public function SetRegistered($registered)
+    public function SetRegistered(?DateTime $registered) : void
     {
         $this->_registered = $registered;
     }
 
-    public function GetIsAdmin()
+    public function SetRegisteredString(string $string) : void
     {
-        return $this->$_isAdmin;
+        $this->_registered = new DateTime($string);
     }
 
-    public function SetIsAdmin($isAdmin)
+    public function GetIsAdmin() : bool
+    {
+        return $this->_isAdmin;
+    }
+
+    public function SetIsAdmin(bool $isAdmin) : void
     {
         $this->_isAdmin = $isAdmin;
     }

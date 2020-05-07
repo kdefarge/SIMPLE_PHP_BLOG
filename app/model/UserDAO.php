@@ -2,72 +2,67 @@
 
 namespace app\model;
 
+use PDO;
+
 class UserDAO extends DAO
 {
     
-    public function Create(User $user)
+    public function Create(User $user) : void
     {
-        $sql = 'INSERT INTO `user`(`name`, `email`, `password`, `is_admin`) VALUES (?, ?, ?, ?)';
-        $this->createQuery($sql, [
-                $user->GetUserName(),
-                $user->GetEmail(),
+        $sql = 'INSERT INTO `user`(`name`, `password`, `is_admin`) VALUES (?, ?, ?)';
+
+        self::createQuery($sql, [
+                $user->GetName(),
                 $user->GetPassword(),
                 $user->GetIsAdmin()
             ]);
     }
 
-    public function Update(User $user)
+    public function Update(User $user) : void
     {
-        $sql = 'UPDATE `user` SET `name`=?,`email`=?,`password`=?, `is_admin`=? WHERE `user_id` = ?';
+        $sql = 'UPDATE `user` SET `name`=?, `password`=?, `is_admin`=? WHERE `user_id` = ?';
 
-        $this->createQuery($sql, [
-                $user->GetUserName(),
-                $user->GetEmail(),
+        self::createQuery($sql, [
+                $user->GetName(),
                 $user->GetPassword(),
                 $user->GetIsAdmin(),
                 $user->GetID()
             ]);
     }
 
-    public function Delete(User $user)
+    public function Delete(User $user) : void
     {
         $sql = 'DELETE FROM `user` WHERE user_id = ?';
-        $this->createQuery($sql, [$user->GetID()]);
+        self::createQuery($sql, [$user->GetID()]);
     }
 
-    private function ReadBy($key, $value)
+    private function ReadBy($key, $value) : ?User
     {
-        $sql = 'SELECT `user_id`, `name`, `email`, `password`, `registered`, `is_admin` FROM user WHERE '.$key.' = ?';
-        $data = $this->createQuery($sql, [$value]);
+        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user WHERE '.$key.' = ?';
+        $data = self::createQuery($sql, [$value]);
         
-        $result = $data->fetch();
+        $result = $data->fetch(PDO::FETCH_ASSOC);
         if(!$result)
             return null;
         
         $user = new User();
-        $user->SetID(           $result['user_id']      );
-        $user->SetName(         $result['name']         );
-        $user->SetEmail(        $result['email']        );
-        $user->SetPassword(     $result['password']     );
-        $user->SetRegistered(   $result['registered']   );
-        $user->SetIsAdmin(      $result['is_admin']     );
+        $user->SetID(                   $result['user_id']      );
+        $user->SetName(                 $result['name']         );
+        $user->SetPassword(             $result['password']     );
+        $user->SetRegisteredString(     $result['registered']   );
+        $user->SetIsAdmin(              $result['is_admin']     );
 
         return $user;
     }
 
-    public function ReadByID($id)
+    public function ReadByID($id) : ?User
     {
-        return $this->ReadBy('user_id', $id);
+        return self::ReadBy('user_id', $id);
     }
 
-    public function ReadByName($name)
+    public function ReadByName($name) : ?User
     {
-        return $this->ReadBy('name', $name);
-    }
-
-    public function ReadByEmail($email)
-    {
-        return $this->ReadBy('email', $email);
+        return self::ReadBy('name', $name);
     }
 }
 

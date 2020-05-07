@@ -6,15 +6,7 @@ use app\model\Controller;
 
 class Home extends Controller
 {
-    public function MethodPost($post)
-    {
-        
-    }
-
-    public function MethodGet($get)
-    {
-        $this->Template("home");
-    }
+    public function MethodGet() : void { }
 }
 
 ?>
