@@ -6,7 +6,6 @@ use PDO;
 
 class UserDAO extends DAO
 {
-    
     public function Create(User $user) : void
     {
         $sql = 'INSERT INTO `user`(`name`, `password`, `is_admin`) VALUES (?, ?, ?)';
@@ -36,7 +35,7 @@ class UserDAO extends DAO
         self::createQuery($sql, [$user->GetID()]);
     }
 
-    private function ReadBy($key, $value) : ?User
+    private function ReadBy(string $key, string $value) : ?User
     {
         $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user WHERE '.$key.' = ?';
         $data = self::createQuery($sql, [$value]);
@@ -55,12 +54,12 @@ class UserDAO extends DAO
         return $user;
     }
 
-    public function ReadByID($id) : ?User
+    public function ReadByID(int $id) : ?User
     {
-        return self::ReadBy('user_id', $id);
+        return self::ReadBy('user_id', (string) $id);
     }
 
-    public function ReadByName($name) : ?User
+    public function ReadByName(string $name) : ?User
     {
         return self::ReadBy('name', $name);
     }

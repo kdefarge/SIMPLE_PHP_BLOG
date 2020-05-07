@@ -8,7 +8,6 @@
 
 require "vendor/autoload.php";
 
-session_start();
-app\model\Controller::Run(['Admin', 'Register'],'Home');
+app\model\Controller::Run(['Admin', 'Register', 'Login'],'Home');
 
 ?>

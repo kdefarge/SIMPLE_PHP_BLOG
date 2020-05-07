@@ -7,17 +7,25 @@ use app\model\User;
 use app\model\UserDAO;
 use app\model\Alert;
 use app\model\UserUtils;
+use app\model\Session;
 
 class Register extends Controller
 {
     protected function MethodPost() : void
     {
+        $session =  new Session($this);
+        $session->ClearAlert();
+        $session->RedirectConnected();
+
         $post = $this->PreparePost(['name', 'password', 'passwordCheck']);
 
         $formValidate = true;
         
         $userUtils = new UserUtils();
-        $userUtils->SetController($this);
+        $userUtils->EnableAlert_Direct($this);
+
+        $userDAO = new UserDAO();
+        $userDAO->SetUtils($userUtils);
 
         if(!$userUtils->PasswordValid($post->password))
             $formValidate = false;
@@ -28,8 +36,6 @@ class Register extends Controller
             $userUtils->AddError('La vérfication du mot de passe doit être identique au mot de passe');
         }
 
-        $userDAO = new UserDAO();
-        $userDAO->SetUtils($userUtils);
         if($userUtils->UserNameValid($post->name))
         {
             if($userDAO->ReadByName($post->name))
@@ -48,10 +54,18 @@ class Register extends Controller
             $user->SetPassword($userUtils->PasswordHash($post->password));
 
             $userDAO->Create($user);
+            $userUtils->EnableAlert_Redirect($session);
+            $userUtils->AddValide('Vous êtes maintenant enregistré !');
+            $this->redirect('home');
         }
     }
 
-    protected function MethodGet() : void { }
+    protected function MethodGet() : void
+    {
+        $session = new Session($this);
+        $session->RedirectConnected();
+        $session->ShowAllAlertAndClear();
+    }
 }
 
 ?>

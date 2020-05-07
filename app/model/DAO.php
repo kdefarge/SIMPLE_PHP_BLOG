@@ -3,6 +3,8 @@
 namespace app\model;
 
 use PDO;
+use Exception;
+use PDOException;
 use TypeError;
 use PDOStatement;
 
@@ -48,10 +50,9 @@ abstract class DAO
             $DAO_LINK->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $DAO_LINK;
         }
-        catch(TypeError $ex)
+        catch(Exception|PDOException|TypeError $ex)
         {
             $this->GetUtils()->Die('SQL error :'.$ex->getMessage());
-            return null;
         }
     }
 
@@ -73,10 +74,9 @@ abstract class DAO
             $result->setFetchMode(PDO::FETCH_CLASS, static::class);
             return $result;
         }
-        catch(TypeError $ex)
+        catch(Exception|PDOException|TypeError $ex)
         {
             $this->GetUtils()->Die('SQL error :'.$ex->getMessage());
-            return null;
         }
     }
 }

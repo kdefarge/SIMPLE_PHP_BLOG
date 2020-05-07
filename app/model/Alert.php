@@ -28,7 +28,7 @@ class Alert
     public $text;
     public $type;
 
-    function __construct($text, $type = self::TYPE_DANGER)
+    function __construct(string $text, int $type = self::TYPE_DANGER)
     {
         $this->title = '';
         $this->text = $text;

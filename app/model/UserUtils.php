@@ -14,7 +14,7 @@ class UserUtils extends Utils
 
     public function UserPasswordVerify(User $user, String $password) : bool
     {
-        if(password_verify(self::PW_PREFIX.$password.self::PW_SUFFIX, $user->GetPassword))
+        if(password_verify(self::PW_PREFIX.$password.self::PW_SUFFIX, $user->GetPassword()))
             return true;
         
         $this->AddError('Le mot de passe n\'est pas identique');

@@ -8,12 +8,14 @@ abstract class Controller
 
     private $_post = null;
     private $_alerts = [];
+    private ?User $_userLogged = null;
+    private $_templateContext = [];
 
     abstract protected function MethodGet() : void;
 
     protected function MethodPost() : void
     {
-        header('Location: index.php');
+        $this->Redirect();
     }
 
     public static function Run(array $controllerValid, string $default) : void
@@ -41,20 +43,14 @@ abstract class Controller
         {
             $context = $this->MethodPost();
 
-            $context = is_array($context)?$context:[];
-
             $context['post'] = $this->_post;
         }
         else
         {            
             $context = $this->MethodGet();
-            
-            $context = is_array($context)?$context:[];
         }
 
-        $context['alerts'] = $this->_alerts;
-
-        $this->Template($controllerName, $context);
+        $this->Template($controllerName);
     }
 
     private function PrepareObject(array $keys, array $array) : object
@@ -70,6 +66,7 @@ abstract class Controller
     protected function PreparePost(array $keys) : object
     {
         $this->_post = $this->PrepareObject($keys, $_POST);
+        $this->TemplateAddContext('post', $this->_post);
         return $this->_post;
     }
 
@@ -83,7 +80,12 @@ abstract class Controller
         $this->_alerts[] = $alert;
     }
 
-    private function Template(string $name, array $context = []) : void
+    public function TemplateAddContext(string $key, $value) : void
+    {
+        $this->_templateContext[$key] = $value;
+    }
+
+    private function Template(string $name) : void
     {
         $loader = new \Twig\Loader\FilesystemLoader(self::TEMPLATE_DIR);
 
@@ -92,18 +94,36 @@ abstract class Controller
             'cache' => 'app/cache'
         ]);
         
+        $context = $this->_templateContext;
+        if(!is_null($this->_userLogged))
+            $context['userLogged'] = $this->_userLogged;
+        if(count($this->_alerts))
+           $context['alerts'] = $this->_alerts;
+        
         echo $twig->render($name.'.html', $context);
     }
 
-    public function Die() : void
+    public function Die(?Alert $alert = null) : void
     {
+        if(!is_null($alert))
+            $this->_alerts[] = $alert;
         $this->Template('base', ['alerts' => $this->_alerts]);
         die();
     }
 
-    protected function Redirect(string $page) : void
+    public function Redirect(string $page = 'home') : void
     {
         header('Location: index.php?page='.$page);
+        $alert = new Alert(
+            'Vous êtes redirigez sur <a href=" index.php?page='.$page.'"> CETTE PAGE </a>',
+             Alert::TYPE_INFO
+            );
+        $this->Die($alert);
+    }
+
+    public function SetUserLogged(User $user) : void
+    {
+        $this->_userLogged = $user;
     }
 }
 
