@@ -6,10 +6,10 @@ abstract class Controller
 {
     const TEMPLATE_DIR = 'app/templates';
 
-    private $_post = null;
-    private $_alerts = [];
+    private array $_alerts = [];
     private ?User $_userLogged = null;
-    private $_templateContext = [];
+    private ?string $_templateName = null;
+    private array $_templateContext = [];
 
     abstract protected function MethodGet() : void;
 
@@ -18,39 +18,35 @@ abstract class Controller
         $this->Redirect();
     }
 
-    public static function Run(array $controllerValid, string $default) : void
+    public static function Run(array $routing, string $default) : void
     {
+        $controllerName = $default;
+
         if(isset($_GET['page']))
         {
-            $controllerName = ucfirst(strtolower($_GET['page']));
-            if(!in_array($controllerName, $controllerValid))
-                $controllerName = $default;
+            $pageName = strtolower($_GET['page']);
+            if(array_key_exists($pageName, $routing))
+                $controllerName = $routing[$pageName];
         }
-        else
-        {
-            $controllerName = $default;
-        }
-
+        
         $class = "\\app\\controller\\$controllerName";
         (new $class())->Running($controllerName);
     }
 
     public function Running(string $controllerName) : void
     {
-        $context = null;
-
         if(count($_POST) > 0)
         {
-            $context = $this->MethodPost();
-
-            $context['post'] = $this->_post;
+            $this->MethodPost();
         }
         else
         {            
-            $context = $this->MethodGet();
+            $this->MethodGet();
         }
 
-        $this->Template($controllerName);
+        $templateName = is_null($this->_templateName)?
+            $controllerName:$this->_templateName;
+        $this->Template($templateName);
     }
 
     private function PrepareObject(array $keys, array $array) : object
@@ -65,9 +61,9 @@ abstract class Controller
 
     protected function PreparePost(array $keys) : object
     {
-        $this->_post = $this->PrepareObject($keys, $_POST);
-        $this->TemplateAddContext('post', $this->_post);
-        return $this->_post;
+        $post = $this->PrepareObject($keys, $_POST);
+        $this->TemplateAddContext('post', $post);
+        return $post;
     }
 
     protected function PrepareGet(array $keys) : object
@@ -78,6 +74,11 @@ abstract class Controller
     public function AddAlert(Alert $alert) : void
     {
         $this->_alerts[] = $alert;
+    }
+
+    public function TemplateSetName(string $name)
+    {
+        $this->_templateName = $name;
     }
 
     public function TemplateAddContext(string $key, $value) : void
@@ -121,7 +122,7 @@ abstract class Controller
         $this->Die($alert);
     }
 
-    public function SetUserLogged(User $user) : void
+    public function SetUserLogged(?User $user) : void
     {
         $this->_userLogged = $user;
     }

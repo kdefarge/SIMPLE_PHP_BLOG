@@ -30,15 +30,33 @@
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/?page=register">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/?page=login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/?page=admin">Admin</a>
-                    </li>
+
+                    {% if userLogged %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/?page=logout">Déconnexion</a>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/?page=register">S'enregistrer</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/?page=login">Connexion</a>
+                        </li>
+
+                    
+                        {% if userLogged.GetIsAdmin() %}
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="/?page=admin">Admin</a>
+                            </li>
+
+                        {% endif %}
+
+                    {% endif %}
+
                 </ul>
             </div>
         </div>

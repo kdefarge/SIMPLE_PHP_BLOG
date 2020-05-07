@@ -41,6 +41,12 @@ class Utils
         $this->AddAlert($alert);        
     }
 
+    public function AddInfo(string $text) : void
+    {
+        $alert = new Alert($text, Alert::TYPE_INFO);
+        $this->AddAlert($alert);        
+    }
+
     public function AddAlert(Alert $alert) : void
     {
         if(!is_null($this->_session))

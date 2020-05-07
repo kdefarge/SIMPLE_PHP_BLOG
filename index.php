@@ -8,6 +8,13 @@
 
 require "vendor/autoload.php";
 
-app\model\Controller::Run(['Admin', 'Register', 'Login'],'Home');
+$routing = [
+    'admin' => 'Routing',
+    'register' => 'Register',
+    'login' => 'Login',
+    'logout' => 'Logout'
+];
+
+app\model\Controller::Run($routing, 'Home');
 
 ?>
