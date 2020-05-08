@@ -46,6 +46,7 @@ abstract class Controller
 
         $templateName = is_null($this->_templateName)?
             $controllerName:$this->_templateName;
+            
         $this->Template($templateName);
     }
 

@@ -26,34 +26,23 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/?page=home">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                        <a class="nav-link" href="/?page=home">Home</a>
                     </li>
 
                     {% if userLogged %}
 
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="/?page=logout">Déconnexion</a>
                         </li>
 
                     {% else %}
 
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="/?page=register">S'enregistrer</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item active">
                             <a class="nav-link" href="/?page=login">Connexion</a>
                         </li>
-
-                    
-                        {% if userLogged.GetIsAdmin() %}
-                        
-                            <li class="nav-item">
-                                <a class="nav-link" href="/?page=admin">Admin</a>
-                            </li>
-
-                        {% endif %}
 
                     {% endif %}
 
@@ -83,6 +72,21 @@
             </div>
 
             <div class="col-md-4">
+
+                {% if userLogged and userLogged.GetIsAdmin() %}
+
+                <div class="card my-4">
+                    <h5 class="card-header">Admin</h5>
+                    <div class="card-body">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="?page=userlist">List d'utilisateurs</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {% endif %}
 
                 <div class="card my-4">
                     <h5 class="card-header">Search</h5>

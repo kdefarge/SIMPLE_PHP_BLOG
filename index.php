@@ -12,7 +12,8 @@ $routing = [
     'admin' => 'Routing',
     'register' => 'Register',
     'login' => 'Login',
-    'logout' => 'Logout'
+    'logout' => 'Logout',
+    'userlist' => 'UserList'
 ];
 
 app\model\Controller::Run($routing, 'Home');

@@ -41,17 +41,11 @@ class UserDAO extends DAO
         $data = self::createQuery($sql, [$value]);
         
         $result = $data->fetch(PDO::FETCH_ASSOC);
-        if(!$result)
-            return null;
-        
-        $user = new User();
-        $user->SetID(                   $result['user_id']      );
-        $user->SetName(                 $result['name']         );
-        $user->SetPassword(             $result['password']     );
-        $user->SetRegisteredString(     $result['registered']   );
-        $user->SetIsAdmin(              $result['is_admin']     );
 
-        return $user;
+        if($result)
+            return $this->DataArrayToUser($result);
+
+        return null;        
     }
 
     public function ReadByID(int $id) : ?User
@@ -62,6 +56,34 @@ class UserDAO extends DAO
     public function ReadByName(string $name) : ?User
     {
         return self::ReadBy('name', $name);
+    }
+
+    public function ReadList() : ?array
+    {
+        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user';
+        $data = self::createQuery($sql);
+        
+        $users = [];
+
+        while ($result = $data->fetch(PDO::FETCH_ASSOC))
+            $users[] = $this->DataArrayToUser($result);
+        
+        if(count($users) > 0)
+            return $users;
+        
+        return null;
+    }
+
+    private function DataArrayToUser(array $array) : User
+    {
+        $user = new User();
+        $user->SetID(                   $array['user_id']      );
+        $user->SetName(                 $array['name']         );
+        $user->SetPassword(             $array['password']     );
+        $user->SetRegisteredString(     $array['registered']   );
+        $user->SetIsAdmin(              $array['is_admin']     );
+
+        return $user;
     }
 }
 

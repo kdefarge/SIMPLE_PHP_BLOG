@@ -6,11 +6,11 @@ use DateTime;
 
 class User
 {
-    private $_userID = 0;
-    private $_name = null;
-    private $_password = null;
+    private int $_userID = 0;
+    private ?string $_name = null;
+    private ?string $_password = null;
     private ?Datetime $_registered = null;
-    private $_isAdmin = false;
+    private bool $_isAdmin = false;
 
     public function GetID() : int
     {

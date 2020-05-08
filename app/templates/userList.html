@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Admin utilisateurs{% endblock %}
+
+{% block content %}
+
+<h1 class="my-4">Admin
+    <small>liste d'utilisateurs</small>
+</h1>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Inscription</th>
+            <th scope="col">Admin</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    {% if users|length > 0 %}
+    <tbody>
+        {% for user in users %}
+
+        <tr>
+            <th scope="row">{{ user.GetID() }}</th>
+            <td>{{ user.GetName() }}</td>
+            <td>{{ user.GetRegistered()|date('d-m-y à H\\Hi', timezone="Europe/Paris")}}</td>
+            <td>{{ user.IsAdmin() ? 'oui' : 'non' }}</td>
+            <td><a href="?page=useredit&id={{ user.GetID() }}">éditer</a></td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+    {% endif %}
+</table>
+
+{% endblock %}
