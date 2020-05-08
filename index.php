@@ -13,7 +13,8 @@ $routing = [
     'register' => 'Register',
     'login' => 'Login',
     'logout' => 'Logout',
-    'userlist' => 'UserList'
+    'userlist' => 'UserList',
+    'useredit' => 'UserEdit'
 ];
 
 app\model\Controller::Run($routing, 'Home');

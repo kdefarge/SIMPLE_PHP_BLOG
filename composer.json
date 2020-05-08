@@ -1,4 +1,5 @@
 {
+    "description": "",
     "name": "kdefarge/simple_php_blog",
     "type": "project",
     "require": {

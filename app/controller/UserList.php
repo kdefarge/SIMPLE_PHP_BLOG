@@ -13,6 +13,8 @@ class UserList extends Controller
     public function MethodGet() : void
     {
         $session = new Session($this);
+        $session->RedirectNoAdmin();
+        $session->ShowAllAlertAndClear();
 
         $userUtils = new UserUtils();
         $userUtils->EnableAlert_Direct($this);

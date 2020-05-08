@@ -18,7 +18,6 @@ class Login extends Controller
         $post = $this->PreparePost(['name', 'password']);
 
         $userUtils = new UserUtils();
-        $userUtils->EnableAlert_Direct($this);
         
         if($userUtils->UserNameValid($post->name))
         {
@@ -38,6 +37,7 @@ class Login extends Controller
             }
         }
 
+        $userUtils->EnableAlert_Direct($this);
         $userUtils->AddError('Erreur identification');
     }
 
