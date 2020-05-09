@@ -35,15 +35,18 @@
     </div>
 
 </form>
-<hr />
-<form method="POST" action="?page=userdelete">
 
-    <input type="hidden" name="userid" value="{{ user.GetID() }}">
+<hr />
+
+<form method="GET" action="index.php">
+
+    <input type="hidden" name="page" value="userdelete">
+    <input type="hidden" name="id" value="{{ user.GetID() }}">
 
     <div class="card text-center">
         <div class="card-body">
-            <h5 class="card-title">Voulez vous supprimer votre compte ?</h5>
-            <button type="button" class="btn btn-danger">Supprimer</button>
+            <h5 class="card-title">Voulez vous supprimer ce compte ?</h5>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
         </div>
     </div>
 

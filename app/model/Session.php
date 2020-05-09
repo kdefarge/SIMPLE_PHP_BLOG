@@ -76,7 +76,16 @@ class Session
         if(is_null($this->_user))
             return;
         
-        $this->AddAlert(new Alert('Vous ne pouvez pas acceder à cette page en étant connecté', ));
+        $this->AddAlert(new Alert('Vous ne pouvez pas acceder à cette page en étant connecté'));
+        $this->_controller->Redirect($page);
+    }
+
+    public function RedirectGuest(string $page = 'home') : void
+    {
+        if(!is_null($this->_user))
+            return;
+        
+        $this->AddAlert(new Alert('Identification nécessaire'));
         $this->_controller->Redirect($page);
     }
 

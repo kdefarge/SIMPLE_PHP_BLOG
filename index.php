@@ -14,7 +14,8 @@ $routing = [
     'login' => 'Login',
     'logout' => 'Logout',
     'userlist' => 'UserList',
-    'useredit' => 'UserEdit'
+    'useredit' => 'UserEdit',
+    'userdelete' => 'UserDelete'
 ];
 
 app\model\Controller::Run($routing, 'Home');

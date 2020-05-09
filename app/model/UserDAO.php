@@ -29,10 +29,10 @@ class UserDAO extends DAO
             ]);
     }
 
-    public function Delete(User $user) : void
+    public function Delete(int $userid) : void
     {
         $sql = 'DELETE FROM `user` WHERE user_id = ?';
-        self::createQuery($sql, [$user->GetID()]);
+        self::createQuery($sql, [$userid]);
     }
 
     private function ReadBy(string $key, string $value) : ?User

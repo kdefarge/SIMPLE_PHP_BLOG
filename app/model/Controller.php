@@ -116,11 +116,7 @@ abstract class Controller
     public function Redirect(string $page = 'home') : void
     {
         header('Location: index.php?page='.$page);
-        $alert = new Alert(
-            'Vous êtes redirigez sur <a href=" index.php?page='.$page.'"> CETTE PAGE </a>',
-             Alert::TYPE_INFO
-            );
-        $this->Die($alert);
+        die('redirection vers => <a href="index.php?page='.$page.'">index.php?page='.$page.'</a>');
     }
 
     public function SetUserLogged(?User $user) : void
