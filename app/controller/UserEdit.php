@@ -24,6 +24,12 @@ class UserEdit extends Controller
 
         $post = $this->PreparePost(['userid', 'name', 'password', 'admin']);
 
+        if($post->userid == $session->GetUserLogged()->GetID())
+        {
+            $userUtils->AddError('Utiliser cette page pour modifier votre compte');
+            $this->Redirect('account');
+        }
+
         $user = is_numeric($post->userid)?$userDAO->ReadByID($post->userid):null;
 
         if(is_null($user))

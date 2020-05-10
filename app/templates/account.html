@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}compte{% endblock %}
+
+{% block content %}
+
+<h1 class="my-4">Compte</h1>
+
+<form method="POST" action="?page=account">
+
+    <div class="form-group">
+        <label for="name">Nom d'utilisateur : </label>
+        <input type="text" class="form-control" name="name" id="name" placeholder="Votre nom d'utilisateur" value="{{ userLogged.GetName() }}">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Mot de passe : </label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="Votre mot de passe">
+        <small id="password" class="text-muted">
+            Doit être entre 8 et 20 caractères de long.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="passwordCheck">Confirmation du mot de passe : </label>
+        <input type="password" class="form-control" name="passwordCheck" id="passwordCheck" placeholder="Vérification du mot de passe">
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">mise à jour</button>
+    </div>
+
+</form>
+<hr />
+
+<form method="GET" action="index.php">
+
+    <input type="hidden" name="page" value="userdelete">
+    <input type="hidden" name="id" value="{{ userLogged.GetID() }}">
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Voulez vous supprimer ce compte ?</h5>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
