@@ -19,7 +19,7 @@ class User
 
     public function SetID(int $userID) : void
     {
-        $this->_userID = intval($userID);
+        $this->_userID = $userID;
     }
 
     public function GetName() : ?string
