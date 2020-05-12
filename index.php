@@ -16,7 +16,10 @@ $routing = [
     'userlist' => 'UserList',
     'useredit' => 'UserEdit',
     'userdelete' => 'UserDelete',
-    'account' => 'Account'
+    'account' => 'Account',
+    'postcreate' => 'PostCreate',
+    'postlist' => 'PostList',
+    'generator' => 'Generator'
 ];
 
 app\model\Controller::Run($routing, 'Home');
