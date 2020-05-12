@@ -7,7 +7,7 @@ use DateTime;
 class Post
 {
     private int $_postID = 0;
-    private int $_userID = 0;
+    private ?User $_user = null;
     private ?string $_title = null;
     private ?string $_header = null;
     private ?string $_content = null;
@@ -24,42 +24,42 @@ class Post
         $this->_postID = $postID;
     }
 
-    public function GetUserID() : int
+    public function GetUser() : ?User
     {
-        return $this->_userID;
+        return $this->_user;
     }
 
-    public function SetUserID(int $userID) : void
+    public function SetUser(?User $user) : void
     {
-        $this->_userID = $userID;
+        $this->_user = $user;
     }
 
-    public function GetTitle() : string
+    public function GetTitle() : ?string
     {
         return $this->_title;
     }
 
-    public function SetTitle(string $title) : void
+    public function SetTitle(?string $title) : void
     {
         $this->_title = $title;
     }
 
-    public function GetHeader() : string
+    public function GetHeader() : ?string
     {
         return $this->_header;
     }
 
-    public function SetHeader(string $header) : void
+    public function SetHeader(?string $header) : void
     {
         $this->_header = $header;
     }
 
-    public function GetContent() : string
+    public function GetContent() : ?string
     {
         return $this->_content;
     }
 
-    public function SetContent(string $content) : void
+    public function SetContent(?string $content) : void
     {
         $this->_content = $content;
     }

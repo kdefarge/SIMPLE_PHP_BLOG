@@ -21,7 +21,13 @@ class UserList extends Controller
 
         $userDAO = new UserDAO();
         $userDAO->SetUtils($userUtils);
-        $this->TemplateAddContext('users', $userDAO->ReadList());
+
+        $get = $this->PrepareGet(['pn']);
+        $pn = is_numeric($get->pn) && $get->pn > 0 ? (int)$get->pn : 1;
+        $this->TemplateAddContext('pn', $pn);
+
+        $this->TemplateAddContext('users', $userDAO->ReadList(--$pn*10));
+
     }
 }
 

@@ -58,20 +58,19 @@ class UserDAO extends DAO
         return self::ReadBy('name', $name);
     }
 
-    public function ReadList() : ?array
+    public function ReadList(int $offset = 0, int $limit = 10, string $orderBy = 'user_id', bool $desc = true) : array
     {
-        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user';
-        $data = self::createQuery($sql);
+        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user '
+            .  'ORDER BY ? '.($desc?' DESC':'')
+            .  ' LIMIT '.$offset.', '.$limit;
+        $data = self::createQuery($sql, [$orderBy]);
         
         $users = [];
 
         while ($result = $data->fetch(PDO::FETCH_ASSOC))
             $users[] = $this->DataArrayToUser($result);
         
-        if(count($users) > 0)
-            return $users;
-        
-        return null;
+        return $users;
     }
 
     private function DataArrayToUser(array $array) : User

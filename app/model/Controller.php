@@ -44,10 +44,10 @@ abstract class Controller
             $this->MethodGet();
         }
 
-        $templateName = is_null($this->_templateName)?
+        $this->_templateName = is_null($this->_templateName)?
             $controllerName:$this->_templateName;
             
-        $this->Template($templateName);
+        $this->Template($this->_templateName);
     }
 
     private function PrepareObject(array $keys, array $array) : object
@@ -97,10 +97,15 @@ abstract class Controller
         ]);
         
         $context = $this->_templateContext;
+
+        if(!isset($context['pagename']))
+            $context['pagename'] = $this->_templateName;
+
         if(!is_null($this->_userLogged))
             $context['userLogged'] = $this->_userLogged;
-        if(count($this->_alerts))
-           $context['alerts'] = $this->_alerts;
+
+        if(count($this->_alerts) > 0)
+            $context['alerts'] = $this->_alerts;
         
         echo $twig->render($name.'.html', $context);
     }

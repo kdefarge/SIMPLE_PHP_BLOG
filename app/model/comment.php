@@ -4,11 +4,11 @@ namespace app\model;
 
 use DateTime;
 
-class Post
+class Comment
 {
     private int $_commentID = 0;
-    private int $_postID = 0;
-    private int $_userID = 0;
+    private ?Post $_post = null;
+    private ?User $_user = null;
     private ?string $_text = null;
     private ?Datetime $_posted = null;
     private bool $_isValid = false;
@@ -23,32 +23,32 @@ class Post
         $this->_commentID = $commentID;
     }
 
-    public function GetPostID() : int
+    public function GetPost() : ?Post
     {
-        return $this->_postID;
+        return $this->_post;
     }
 
-    public function SetPostID(int $postID) : void
+    public function SetPost(?Post $post) : void
     {
-        $this->_postID = $postID;
+        $this->_post = $post;
     }
 
-    public function GetUserID() : int
+    public function GetUser() : ?User
     {
-        return $this->_userID;
+        return $this->_user;
     }
 
-    public function SetUserID(int $userID) : void
+    public function SetUser(?User $user) : void
     {
-        $this->_userID = $userID;
+        $this->_user = $user;
     }
 
-    public function GetText() : string
+    public function GetText() : ?string
     {
         return $this->_text;
     }
 
-    public function SetText(string $text) : void
+    public function SetText(?string $text) : void
     {
         $this->_text = $text;
     }
