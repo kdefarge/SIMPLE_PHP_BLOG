@@ -4,53 +4,28 @@
 
 {% block content %}
 
-    <h1 class="my-4">Page Heading
-        <small>Secondary Text</small>
+    <h1 class="my-4">Accueil
+        <small>Les articles :</small>
     </h1>
 
-    <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title">Post Title</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-        </div>
-        <div class="card-footer text-muted">
-            Posted on January 1, 2017 by
-            <a href="#">Start Bootstrap</a>
-        </div>
-    </div>
+    {% if posts|length > 0 %}
+        {% for post in posts %}
+        
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.GetTitle() }}</h2>
+                    <p class="card-text">{{ post.GetHeader() }}</p>
+                    <a href="#" class="btn btn-primary">Lire la suite &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Mis à jour le {{ post.GetUpdated()|date('d/m/y à H\\Hi', timezone="Europe/Paris") }}
+                    {{ post.GetUser().GetName()?' par ' ~ post.GetUser().GetName():'' }}
+                </div>
+            </div>
 
-    <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title">Post Title</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-        </div>
-        <div class="card-footer text-muted">
-            Posted on January 1, 2017 by
-            <a href="#">Start Bootstrap</a>
-        </div>
-    </div>
+        {% endfor %}
+    {% endif %}
 
-    <div class="card mb-4">
-        <div class="card-body">
-            <h2 class="card-title">Post Title</h2>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
-        </div>
-        <div class="card-footer text-muted">
-            Posted on January 1, 2017 by
-            <a href="#">Start Bootstrap</a>
-        </div>
-    </div>
-
-    <ul class="pagination justify-content-center mb-4">
-        <li class="page-item">
-            <a class="page-link" href="#">&larr; Older</a>
-        </li>
-        <li class="page-item disabled">
-            <a class="page-link" href="#">Newer &rarr;</a>
-        </li>
-    </ul>
+    {{ include('pagination.html', {pnlimit: 2}) }}
 
 {% endblock %}

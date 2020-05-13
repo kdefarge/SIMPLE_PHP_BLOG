@@ -17,7 +17,7 @@ class PostDAO extends DAO
                 $post->GetTitle(),
                 $post->GetHeader(),
                 $post->GetContent(),
-                $post->GetPublish()->format('Y-m-d H:i:s')
+                is_null($post->GetPublish())?null:$post->GetPublish()->format('Y-m-d H:i:s')
             ]);
     }
 
@@ -32,7 +32,7 @@ class PostDAO extends DAO
                 $post->GetTitle(),
                 $post->GetHeader(),
                 $post->GetContent(),
-                $post->GetPublish()->format('Y-m-d H:i:s'),
+                is_null($post->GetPublish())?null:$post->GetPublish()->format('Y-m-d H:i:s'),
                 $post->GetID()
             ]);
     }

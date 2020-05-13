@@ -6,7 +6,7 @@
 
 <h1 class="my-4">Ajouter un nouvel article</h1>
 
-<form method="POST" action="?page=postcreate">
+<form method="POST" action="?page=postcreate" novalidate>
     <div class="form-group">
         <label for="title">Le titre : </label>
         <input type="text" class="form-control" name="title" id="title" placeholder="Le titre" value="{{ post.title }}" maxlength="45">

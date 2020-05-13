@@ -43,7 +43,8 @@ class PostCreate extends Controller
         $post = new Post();
         $post->SetTitle($p->title);
         $post->SetUser($user);
-        $post->SetPublishString($p->publish);
+        if(!empty($p->publish))
+            $post->SetPublishString($p->publish);
         $post->SetHeader($p->header);
         $post->SetContent($p->content);
 
@@ -59,11 +60,11 @@ class PostCreate extends Controller
         $session->RedirectNoAdmin();
         $session->ShowAllAlertAndClear();
         
-        $userUtils = new UserUtils();
-        $userUtils->EnableAlert_Direct($this);
+        $utils = new Utils();
+        $utils->EnableAlert_Direct($this);
         
         $userDAO = new UserDAO();
-        $userDAO->SetUtils($userUtils);
+        $userDAO->SetUtils($utils);
 
         $this->TemplateAddContext('admins', $userDAO->ReadAdminList());
         $this->TemplateSetName('post_create');
