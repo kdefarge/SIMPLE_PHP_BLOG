@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Modifier un article{% endblock %}
+
+{% block content %}
+
+<h1 class="my-4">Modifier un nouvel article</h1>
+
+<form method="post" action="?page=postedit" novalidate>
+    
+    <input type="hidden" name="postid" value="{{ p.GetID() }}">
+
+    <div class="form-group">
+        <label for="title">Le titre : </label>
+        <input type="text" class="form-control" name="title" id="title" placeholder="Le titre" value="{{ p.GetTitle() }}" maxlength="45">
+    </div>
+    <div class="form-group">
+        <label for="author">Auteur : </label>
+        <select class="form-control" id="author" name="authorid">
+            <option value="null">Aucun</option>
+            {% for user in admins %}
+                <option value="{{ user.GetID() }}"{{ user.GetID() == p.GetUser().GetID() ? ' selected' : '' }}>{{ user.GetName() }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="publish">Date de publication : </label>
+        <input type="datetime-local" class="form-control" name="publish" id="publish" value="{{ p.GetPublish() ? p.GetPublish()|date("Y-m-d\\TH:i:s") : '' }}">
+    </div>
+    <div class="form-group">
+        <label for="post-header">Le chapô :</label>
+        <textarea class="form-control" id="post-header" rows="3" name="header">{{ p.GetHeader() }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="post-content">Le contenu :</label>
+        <textarea class="form-control" id="post-content" rows="6" name="content">{{ p.GetContent() }}</textarea>
+    </div>
+    <div class="form-group">
+        <label for="publish">Dernière mise à jour le {{ p.GetUpdated()|date("d/m/y à H\\Hi") }}</label>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+    </div>
+</form>
+
+{% endblock %}

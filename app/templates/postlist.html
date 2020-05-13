@@ -12,12 +12,13 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col" rowspan="2">#</th>
-            <th scope="col" colspan="3">Titre</th>
+            <th scope="col" colspan="4">Titre</th>
         </tr>
         <tr>
             <th scope="col">auteur</th>
             <th scope="col">publication</th>
             <th scope="col">mise à jour</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     {% if posts|length > 0 %}
@@ -26,12 +27,13 @@
         
         <tr>
             <th scope="col" rowspan="2">#</th>
-            <th scope="col" colspan="3">{{ post.GetTitle() }}</th>
+            <th scope="col" colspan="4">{{ post.GetTitle() }}</th>
         </tr>
         <tr>
             <td>{{ post.GetUser().GetName() }}</td>
             <td>{{ post.GetPublish() ? post.GetPublish()|date('d-m-y à H\\Hi', timezone="Europe/Paris") : '' }}</td>
             <td>{{ post.GetUpdated() ? post.GetUpdated()|date('d-m-y à H\\Hi', timezone="Europe/Paris") : '' }}</td>
+            <td><a href="?page=postedit&id={{ post.GetID() }}">éditer</a></td>
         </tr>
 
         {% endfor %}
