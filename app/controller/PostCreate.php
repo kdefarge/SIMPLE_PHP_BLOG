@@ -15,8 +15,6 @@ class PostCreate extends Controller
 {
     protected function MethodPost() : void
     {
-        $this->TemplateSetName('post_create');
-
         $session =  new Session($this);
         $session->ClearAlert();
         $session->RedirectNoAdmin();
@@ -67,7 +65,6 @@ class PostCreate extends Controller
         $userDAO->SetUtils($utils);
 
         $this->TemplateAddContext('admins', $userDAO->ReadAdminList());
-        $this->TemplateSetName('post_create');
     }
 }
 
