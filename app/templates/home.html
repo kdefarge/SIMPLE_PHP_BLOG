@@ -14,7 +14,7 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{ post.GetTitle() }}</h2>
-                    <p class="card-text">{{ post.GetHeader() }}</p>
+                    <p class="card-text">{{ post.GetHeader()|nl2br }}</p>
                     <a href="index.php?page=postread&id={{ post.GetID() }}" class="btn btn-primary">Lire la suite &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
