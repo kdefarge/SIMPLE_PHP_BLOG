@@ -43,12 +43,13 @@ class PostDAO extends DAO
         self::createQuery($sql, [$postid]);
     }
 
-    public function ReadList(int $offset = 0, int $limit = 10) : array
+    public function ReadList(int $offset = 0, int $limit = 10, bool $only_published = true) : array
     {
         $sql = 'SELECT p.`post_id`, p.`user_id`, p.`title`, p.`header`, p.`content`, '
             .  'p.`publish`, p.`updated`, u.`name` FROM post p '
             .  'LEFT JOIN user u ON u.`user_id` = p.`user_id` '
-            .  'ORDER BY `updated` DESC'
+            .  ( $only_published ? 'WHERE `publish` <= NOW() ' : '' )
+            .  'ORDER BY `publish` DESC, `updated` DESC'
             .  ' LIMIT '.$offset.', '.$limit;
         $data = self::createQuery($sql);
         

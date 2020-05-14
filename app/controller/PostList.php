@@ -25,7 +25,7 @@ class PostList extends Controller
         $pn = is_numeric($get->pn) && $get->pn > 0 ? (int)$get->pn : 1;
         $this->TemplateAddContext('pn', $pn);
 
-        $this->TemplateAddContext('posts', $postDAO->ReadList(--$pn*10));
+        $this->TemplateAddContext('posts', $postDAO->ReadList(--$pn*10, 10, false));
     }
 }
 
