@@ -22,6 +22,8 @@ $routing = [
     'postlist' => 'PostList',
     'postdelete' => 'PostDelete',
     'postread' => 'PostRead',
+    'commentvalid' => 'CommentValid',
+    'commentdelete' => 'CommentDelete',
     'generator' => 'Generator'
 ];
 

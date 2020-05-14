@@ -52,6 +52,7 @@ class PostRead extends Controller
         
         if(is_null($user))
         {
+            $session->SetUserLogged(null);
             $utils->AddError('Compte supprimé');
             $utils->AddInfo('Votre session a expiré');
             $this->Redirect();

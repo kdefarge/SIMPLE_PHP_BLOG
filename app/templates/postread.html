@@ -33,18 +33,43 @@
     </div>
 </div>
 
-{% for comment in comments %}
+{% if userLogged and userLogged.GetIsAdmin() %}
+    {% for comment in comments %}
+    <div class="media mb-4">
+        <div class="media-body {{ comment.GetIsValid() ? 'bg-success' : 'bg-warning'}}">
+            <h6 class="mt-0">
+                <small>Par</small>
+                {{ comment.GetUser().GetName() }}
+                <small><i>le {{ comment.GetPosted()|date('d/m/y à H\\Hi') }}</i></small>
+                {% if not comment.GetIsValid() %}
+                    <a href="?page=commentvalid&id={{ comment.GetID() }}">valider</a> / 
+                {% endif %}
+                <a href="?page=commentdelete&id={{ comment.GetID() }}">supprimer</a>
+            </h6>
+            <p class="text-break">{{ comment.GetText()|nl2br }}</p>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+{% else %}
+    {% for comment in comments %}
+    {% if comment.GetIsValid() %}
     <div class="media mb-4">
         <div class="media-body">
             <h6 class="mt-0">
                 <small>Par</small>
                 {{ comment.GetUser().GetName() }}
                 <small><i>le {{ comment.GetPosted()|date('d/m/y à H\\Hi') }}</i></small>
+                {% if userLogged.GetID() == comment.GetUser().GetID() %}
+                    <small><a href="?page=commentdelete&id={{ comment.GetID() }}">supprimer</a></small>
+                {% endif %}
             </h6>
             <p class="text-break">{{ comment.GetText()|nl2br }}</p>
         </div>
     </div>
     <hr>
-{% endfor %}
+    {% endif %}
+    {% endfor %}
+{% endif %}
 
 {% endblock %}

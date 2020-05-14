@@ -14,10 +14,9 @@ class Logout extends Controller
         $session->SetUserLogged(null);
 
         $utils = new Utils();
-        $utils->EnableAlert_Direct($this);
+        $utils->EnableAlert_Redirect($session);
         $utils->AddInfo('Vous êtes déconnecté');
-
-        $this->TemplateSetName('Home');
+        $this->Redirect();
     }
 }
 
