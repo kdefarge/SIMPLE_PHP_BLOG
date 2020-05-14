@@ -20,6 +20,7 @@ $routing = [
     'postcreate' => 'PostCreate',
     'postedit' => 'PostEdit',
     'postlist' => 'PostList',
+    'postdelete' => 'PostDelete',
     'generator' => 'Generator'
 ];
 
