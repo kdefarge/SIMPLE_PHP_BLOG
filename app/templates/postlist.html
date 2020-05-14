@@ -26,7 +26,13 @@
     <tbody>
         {% for post in posts %}
         
-        <tr>
+        {% if post.GetPublish() and post.GetPublish() <= date() %}
+        <tr class="table-success">
+        {% elseif post.GetPublish() and post.GetPublish() > date() %}
+        <tr class="table-primary">
+        {% else %}
+        <tr class="table-warning">
+        {% endif %}
             <th scope="col" rowspan="2">{{ post.GetID() }}</th>
             <th scope="col" colspan="5">{{ post.GetTitle() }}</th>
         </tr>

@@ -49,7 +49,7 @@ class PostDAO extends DAO
             .  'p.`publish`, p.`updated`, u.`name` FROM post p '
             .  'LEFT JOIN user u ON u.`user_id` = p.`user_id` '
             .  ( $only_published ? 'WHERE `publish` <= NOW() ' : '' )
-            .  'ORDER BY `publish` DESC, `updated` DESC'
+            .  'ORDER BY `updated` DESC'
             .  ' LIMIT '.$offset.', '.$limit;
         $data = self::createQuery($sql);
         

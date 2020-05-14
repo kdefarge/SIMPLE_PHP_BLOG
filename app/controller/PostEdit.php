@@ -48,7 +48,9 @@ class PostEdit extends Controller
         else
             $utils->AddInfo('Ancien titre restauré !');
         $post->SetUser($user);
-        if(!empty($p->publish))
+        if(empty($p->publish))
+            $post->SetPublish(null);
+        else
             $post->SetPublishString($p->publish);
         $post->SetHeader($p->header);
         $post->SetContent($p->content);
