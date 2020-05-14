@@ -56,7 +56,7 @@ class PostDAO extends DAO
         $posts = [];
 
         while ($array = $data->fetch(PDO::FETCH_ASSOC))
-            $posts[] = $this->DataArrayToUser($array);
+            $posts[] = $this->DataArrayToPost($array);
         
         return $posts;
     }
@@ -72,11 +72,11 @@ class PostDAO extends DAO
         $result = $data->fetch(PDO::FETCH_ASSOC);
 
         if($result)
-            return $this->DataArrayToUser($result);
+            return $this->DataArrayToPost($result);
         return null;     
     }
 
-    private function DataArrayToUser(array $array) : Post
+    private function DataArrayToPost(array $array) : Post
     {
         if(is_null($array['user_id']))
         {
