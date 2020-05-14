@@ -63,7 +63,7 @@ class Utils
     {
         if(!is_null($this->_session))
         {
-            $this->_session->GetController->Die(new Alert($text));
+            $this->_session->GetController()->Die(new Alert($text));
         }
         elseif(!is_null($this->_controller))
         {            

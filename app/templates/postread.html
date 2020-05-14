@@ -21,22 +21,30 @@
 <hr>
 
 <div class="card my-4">
-    <h5 class="card-header">Publié un commentaire :</h5>
+    <h5 class="card-header" id="comment_section">Publié un commentaire :</h5>
     <div class="card-body">
-        <form>
+        <form method="post" action="?page=postread">
+            <input type="hidden" name="postid" value="{{ post.GetID() }}">
             <div class="form-group">
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" rows="3" name="text">{{ m_post.text }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Commenter</button>
         </form>
     </div>
 </div>
 
-<div class="media mb-4">
-    <div class="media-body">
-    <h5 class="mt-0">Commenter Name</h5>
-    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+{% for comment in comments %}
+    <div class="media mb-4">
+        <div class="media-body">
+            <h6 class="mt-0">
+                <small>Par</small>
+                {{ comment.GetUser().GetName() }}
+                <small><i>le {{ comment.GetPosted()|date('d/m/y à H\\Hi') }}</i></small>
+            </h6>
+            <p class="text-break">{{ comment.GetText()|nl2br }}</p>
+        </div>
     </div>
-</div>
+    <hr>
+{% endfor %}
 
 {% endblock %}

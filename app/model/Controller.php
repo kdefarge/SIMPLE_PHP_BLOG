@@ -63,7 +63,7 @@ abstract class Controller
     protected function PreparePost(array $keys) : object
     {
         $post = $this->PrepareObject($keys, $_POST);
-        $this->TemplateAddContext('post', $post);
+        $this->TemplateAddContext('m_post', $post);
         return $post;
     }
 
