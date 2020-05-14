@@ -21,6 +21,7 @@ $routing = [
     'postedit' => 'PostEdit',
     'postlist' => 'PostList',
     'postdelete' => 'PostDelete',
+    'postread' => 'PostRead',
     'generator' => 'Generator'
 ];
 

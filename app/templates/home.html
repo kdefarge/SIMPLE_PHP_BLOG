@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <h2 class="card-title">{{ post.GetTitle() }}</h2>
                     <p class="card-text">{{ post.GetHeader() }}</p>
-                    <a href="#" class="btn btn-primary">Lire la suite &rarr;</a>
+                    <a href="index.php?page=postread&id={{ post.GetID() }}" class="btn btn-primary">Lire la suite &rarr;</a>
                 </div>
                 <div class="card-footer text-muted">
                     Mis à jour le {{ post.GetUpdated()|date('d/m/y à H\\Hi', timezone="Europe/Paris") }}

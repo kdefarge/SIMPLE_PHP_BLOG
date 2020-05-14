@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - article{% endblock %}
+
+{% block content %}
+
+<h1 class="mt-4">{{ post.GetTitle() }}</h1>
+
+{% if post.GetUser().GetName() %}
+    <p class="lead"> par {{ post.GetUser().GetName() }} </p>
+{% endif %}
+
+<hr>
+
+<p>Mis à jour le {{ post.GetUpdated()|date('d/m/y à H\\Hi') }}</p>
+
+<hr>
+
+<p class="lead">{{ post.GetContent() }}</p>
+
+<hr>
+
+<div class="card my-4">
+    <h5 class="card-header">Publié un commentaire :</h5>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Commenter</button>
+        </form>
+    </div>
+</div>
+
+<div class="media mb-4">
+    <div class="media-body">
+    <h5 class="mt-0">Commenter Name</h5>
+    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+    </div>
+</div>
+
+{% endblock %}

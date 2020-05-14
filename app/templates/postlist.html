@@ -27,7 +27,7 @@
         {% for post in posts %}
         
         <tr>
-            <th scope="col" rowspan="2">#</th>
+            <th scope="col" rowspan="2">{{ post.GetID() }}</th>
             <th scope="col" colspan="5">{{ post.GetTitle() }}</th>
         </tr>
         <tr>
