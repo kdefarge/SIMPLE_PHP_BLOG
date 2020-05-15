@@ -121,7 +121,7 @@ class PostRead extends Controller
         $commentDAO = new CommentDAO();
         $commentDAO->SetUtils($utils);
 
-        $comments = $commentDAO->ReadList($post->GetID(), 0, 10, false);
+        $comments = $commentDAO->ReadList($post->GetID());
 
         $this->TemplateAddContext('post', $post);
         $this->TemplateAddContext('comments', $comments);

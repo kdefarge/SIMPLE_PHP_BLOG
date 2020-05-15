@@ -24,6 +24,7 @@ $routing = [
     'postread' => 'PostRead',
     'commentvalid' => 'CommentValid',
     'commentdelete' => 'CommentDelete',
+    'contact' => 'Contact',
     'generator' => 'Generator'
 ];
 

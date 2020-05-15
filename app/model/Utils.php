@@ -101,6 +101,15 @@ class Utils
         $this->AddError('Le champ '.$name.' doit contenir au maximum '.$maxSize.' caractères');
         return false;
     }
+
+    public function ValidateEmail(string $name, string $value) : bool
+    {
+        if(filter_var($value, FILTER_VALIDATE_EMAIL))
+            return true;
+
+        $this->AddError('Le champ '.$name.' n\'est pas une adresse valide');
+        return false;
+    }
 }
 
 ?>
