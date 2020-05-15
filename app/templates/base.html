@@ -64,16 +64,7 @@
 
             <div class="col-md-8">
 
-                {% for alert in alerts %}
                 
-                <p>
-                    <div class="alert alert-{{ alert.type }}" role="alert">
-                        <h4 class="alert-heading">{{ alert.title }}</h4>
-                        <p>{{ alert.text }}</p>
-                    </div>
-                </p>
-
-                {% endfor %}
 
                 <p>{% block content %}{% endblock %}</p>
             </div>

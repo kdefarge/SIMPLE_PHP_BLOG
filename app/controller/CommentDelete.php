@@ -41,13 +41,13 @@ class CommentDelete extends Controller
             if($comment->GetUser()->GetID() != $user->GetID())
             {
                 $utils->AddError('Vous ne pouvez faire ça !');
-                $this->Redirect('postread&id='.$comment->GetPost()->GetID());
+                $this->Redirect('postread&id='.$comment->GetPost()->GetID().'#comment_section');
             }
             $commentDAO->Delete($comment->GetID());
         }
 
         $utils->AddValide('Commentaire supprimé !');
-        $this->Redirect('postread&id='.$comment->GetPost()->GetID());
+        $this->Redirect('postread&id='.$comment->GetPost()->GetID().'#comment_section');
     }
 }
 

@@ -23,7 +23,8 @@
 <div class="card my-4">
     <h5 class="card-header" id="comment_section">Publié un commentaire :</h5>
     <div class="card-body">
-        <form method="post" action="?page=postread">
+        {{ include('alert.html') }}
+        <form method="post" action="?page=postread#comment_section">
             <input type="hidden" name="postid" value="{{ post.GetID() }}">
             <div class="form-group">
                 <textarea class="form-control" rows="3" name="text">{{ m_post.text }}</textarea>
@@ -35,8 +36,8 @@
 
 {% if userLogged and userLogged.GetIsAdmin() %}
     {% for comment in comments %}
-    <div class="media mb-4">
-        <div class="media-body {{ comment.GetIsValid() ? 'bg-success' : 'bg-warning'}}">
+    <div class="media mb-4 {{ comment.GetIsValid() ? 'sml-bg-green' : 'sml-bg-red'}}">
+        <div class="media-body">
             <h6 class="mt-0">
                 <small>Par</small>
                 {{ comment.GetUser().GetName() }}

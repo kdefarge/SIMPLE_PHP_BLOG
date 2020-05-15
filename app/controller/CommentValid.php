@@ -34,7 +34,7 @@ class CommentValid extends Controller
         $commentDAO->UpdateValid($comment->GetID(), true);
 
         $utils->AddInfo('Commentaire validé');
-        $this->Redirect('postread&id='.$comment->GetPost()->GetID());
+        $this->Redirect('postread&id='.$comment->GetPost()->GetID().'#comment_section');
     }
 }
 

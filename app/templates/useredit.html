@@ -6,6 +6,8 @@
 
 <h1 class="my-4">Compte</h1>
 
+{{ include('alert.html') }}
+
 <form method="POST" action="?page=useredit">
     
     <input type="hidden" name="userid" value="{{ user.GetID() }}">

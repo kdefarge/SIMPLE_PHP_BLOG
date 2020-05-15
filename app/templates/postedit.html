@@ -6,6 +6,8 @@
 
 <h1 class="my-4">Modifier un nouvel article</h1>
 
+{{ include('alert.html') }}
+
 <form method="post" action="?page=postedit" novalidate>
     
     <input type="hidden" name="postid" value="{{ p.GetID() }}">
