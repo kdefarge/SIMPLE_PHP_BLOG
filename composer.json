@@ -1,0 +1,28 @@
+{
+    "description": "",
+    "name": "kdefarge/simple_php_blog",
+    "type": "project",
+    "require": {
+        "twbs/bootstrap": "v4.4.1",
+        "twig/twig": "v3.0.3"
+    },
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Kevin DEFARGE",
+            "email": "1819360+kdefarge@users.noreply.github.com"
+        }
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "sass sass:public/css/ --style=compressed --no-source-map",
+            "php composer_install_script.php"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\model\\": "app/model/",
+            "app\\controller\\": "app/controller/"
+        }
+    }
+}

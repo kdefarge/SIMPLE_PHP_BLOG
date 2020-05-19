@@ -1,0 +1,22 @@
+{% set pn = pn is null ? 1 : pn %}
+{% set pnlimit = pnlimit is null ? 3 : pnlimit %}
+{% set pnrange = pn > pnlimit ? pn - pnlimit : 1 %}
+
+<nav aria-label="pagination_nav">
+    <ul class="pagination justify-content-center">
+        <li class="page-item{{ pn == 1 ? ' disabled' : '' }}">
+            <a class="page-link" href="?page={{ pagename }}&pn={{ pn - 1 }}">Précédent</a>
+        </li>
+        <li class="page-item{{ pn == 1 ? ' disabled' : '' }}">
+            <a class="page-link" href="?page={{ pagename }}">Début</a>
+        </li>
+        {% for i in range(pnrange, pnrange + ( 2 * pnlimit ) ) %}
+            <li class="page-item{{ pn == i ? ' active' : '' }}">
+                <a class="page-link" href="?page={{ pagename }}&pn={{ i }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ pagename }}&pn={{ pn + 1 }}">Suivant</a>
+        </li>
+    </ul>
+</nav>

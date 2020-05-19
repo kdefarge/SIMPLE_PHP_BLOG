@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Suppression de compte{% endblock %}
+
+{% block content %}
+
+<h1 class="my-4">Suppression de compte</h1>
+
+<form method="POST" action="?page=userdelete">
+
+    <input type="hidden" name="userid" value="{{ userid }}">
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Êtes-vous sûrs de supprimer ce compte ?</h5>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

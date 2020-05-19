@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Home{% endblock %}
+
+{% block content %}
+
+    {{ include('alert.html') }}
+
+    <h1 class="my-4">Accueil
+        <small>Les articles :</small>
+    </h1>
+
+    {% if posts|length > 0 %}
+        {% for post in posts %}
+        
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.GetTitle() }}</h2>
+                    <p class="card-text">{{ post.GetHeader()|nl2br }}</p>
+                    <a href="index.php?page=postread&id={{ post.GetID() }}" class="btn btn-primary">Lire la suite &rarr;</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Mis à jour le {{ post.GetUpdated()|date('d/m/y à H\\Hi', timezone="Europe/Paris") }}
+                    {{ post.GetUser().GetName()?' par ' ~ post.GetUser().GetName():'' }}
+                </div>
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+    {{ include('pagination.html', {pnlimit: 2}) }}
+
+{% endblock %}

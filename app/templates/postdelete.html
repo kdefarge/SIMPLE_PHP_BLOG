@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Suppression de l'article{% endblock %}
+
+{% block content %}
+
+<h1 class="my-4">Suppression de l'article</h1>
+
+<form method="post" action="?page=postdelete">
+
+    <input type="hidden" name="postid" value="{{ postid }}">
+
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">Êtes-vous sûrs de supprimer cette article ?</h5>
+            <button type="submit" class="btn btn-danger">Supprimer</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
