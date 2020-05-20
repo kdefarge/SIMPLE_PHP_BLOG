@@ -1,11 +1,67 @@
-# SIMPLE_PHP_BLOG
+# SIMPLE PHP BLOG
 
-before install with "composer install" command check you have installed php and sass command in your system.
+My professional blog
 
-For live css update use :
+## Getting Started
 
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+[SASS](https://sass-lang.com/)
+
+[Composer](https://getcomposer.org/) 
+
+```
+MySQL
+```
+
+```
+PHP 7 or more
+```
+
+### Installing
+
+Install database with install_db.sql script
+
+```
+database\install_db.sql
+```
+
+Check you have installed php and sass command in your system and after use composer command
+
+```
+composer install
+```
+
+### Compiling Sass (DEV)
+
+If you need compile sass files 
+
+```
 sass --watch sass:public/css/ --style=compressed --no-source-map
+```
 
-Composer install execute this command :
+Or 
 
+```
 sass sass:public/css/ --style=compressed --no-source-map
+```
+
+## Built With
+
+* [Composer](https://getcomposer.org/) - A Dependency Manager for PHP
+* [SASS](https://sass-lang.com/) - Professional grade CSS extension
+* [Bootstrap](https://getbootstrap.com/) - front-end framework
+* [Jquery](https://jquery.com/) - JavaScript library
+* [Twig](https://twig.symfony.com/) - Modern template engine for PHP
+
+## Authors
+
+* **Kevin DEFARGE** - *Initial work* - [kdefarge](https://github.com/kdefarge)
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE.md](LICENSE.md) file for details
