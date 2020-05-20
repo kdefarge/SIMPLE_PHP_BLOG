@@ -8,7 +8,7 @@ class UserDAO extends DAO
 {
     public function Create(User $user) : void
     {
-        $sql = 'INSERT INTO `user`(`name`, `password`, `is_admin`) VALUES (?, ?, ?)';
+        $sql = 'INSERT INTO `spb_user`(`name`, `password`, `is_admin`) VALUES (?, ?, ?)';
 
         self::createQuery($sql, [
                 $user->GetName(),
@@ -19,7 +19,7 @@ class UserDAO extends DAO
 
     public function Update(User $user) : void
     {
-        $sql = 'UPDATE `user` SET `name`=?, `password`=?, `is_admin`=? WHERE `user_id` = ?';
+        $sql = 'UPDATE `spb_user` SET `name`=?, `password`=?, `is_admin`=? WHERE `user_id` = ?';
 
         self::createQuery($sql, [
                 $user->GetName(),
@@ -31,13 +31,13 @@ class UserDAO extends DAO
 
     public function Delete(int $userid) : void
     {
-        $sql = 'DELETE FROM `user` WHERE user_id = ?';
+        $sql = 'DELETE FROM `spb_user` WHERE user_id = ?';
         self::createQuery($sql, [$userid]);
     }
 
     public function ReadByID(int $id) : ?User
     {
-        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user WHERE `user_id` = ?';
+        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM spb_user WHERE `user_id` = ?';
         $data = self::createQuery($sql, [$id]);
         if($result = $data->fetch(PDO::FETCH_ASSOC))
             return $this->DataArrayToUser($result);
@@ -46,7 +46,7 @@ class UserDAO extends DAO
 
     public function ReadByName(string $name) : ?User
     {
-        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user WHERE `name` = ?';
+        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM spb_user WHERE `name` = ?';
         $data = self::createQuery($sql, [$name]);
         if($result = $data->fetch(PDO::FETCH_ASSOC))
             return $this->DataArrayToUser($result);
@@ -55,7 +55,7 @@ class UserDAO extends DAO
 
     public function ReadAdminList() : array
     {
-        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user WHERE `is_admin` = 1';
+        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM spb_user WHERE `is_admin` = 1';
         $data = self::createQuery($sql);
         $users = [];
         while ($result = $data->fetch(PDO::FETCH_ASSOC))
@@ -65,7 +65,7 @@ class UserDAO extends DAO
 
     public function ReadList(int $offset = 0, int $limit = 10, string $orderBy = 'user_id', bool $desc = true) : array
     {
-        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM user '
+        $sql = 'SELECT `user_id`, `name`, `password`, `registered`, `is_admin` FROM spb_user '
             .  'ORDER BY ? '.($desc?' DESC':'')
             .  ' LIMIT '.$offset.', '.$limit;
         $data = self::createQuery($sql, [$orderBy]);

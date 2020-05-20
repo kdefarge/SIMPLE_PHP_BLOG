@@ -8,7 +8,7 @@ class PostDAO extends DAO
 {
     public function Create(Post $post) : void
     {
-        $sql = 'INSERT INTO `post`'
+        $sql = 'INSERT INTO `spb_article`'
             .  '(`user_id`, `title`, `header`, `content`, `publish`)'
             .  ' VALUES (?, ?, ?, ?, ?)';
 
@@ -23,7 +23,7 @@ class PostDAO extends DAO
 
     public function Update(Post $post) : void
     {
-        $sql = 'UPDATE `post` SET '
+        $sql = 'UPDATE `spb_article` SET '
             .  '`user_id`=?, `title`=?, `header`=?, `content`=?, `publish`=?'
             .  ' WHERE `post_id` = ?';
 
@@ -39,15 +39,15 @@ class PostDAO extends DAO
 
     public function Delete(int $postid) : void
     {
-        $sql = 'DELETE FROM `post` WHERE post_id = ?';
+        $sql = 'DELETE FROM `spb_article` WHERE post_id = ?';
         self::createQuery($sql, [$postid]);
     }
 
     public function ReadList(int $offset = 0, int $limit = 10, bool $only_published = true) : array
     {
         $sql = 'SELECT p.`post_id`, p.`user_id`, p.`title`, p.`header`, p.`content`, '
-            .  'p.`publish`, p.`updated`, u.`name` FROM post p '
-            .  'LEFT JOIN user u ON u.`user_id` = p.`user_id` '
+            .  'p.`publish`, p.`updated`, u.`name` FROM spb_article p '
+            .  'LEFT JOIN spb_user u ON u.`user_id` = p.`user_id` '
             .  ( $only_published ? 'WHERE `publish` <= NOW() ' : '' )
             .  'ORDER BY `updated` DESC'
             .  ' LIMIT '.$offset.', '.$limit;
@@ -64,8 +64,8 @@ class PostDAO extends DAO
     public function ReadByID(int $id) : ?Post
     {
         $sql = 'SELECT p.`post_id`, p.`user_id`, p.`title`, p.`header`, p.`content`, '
-            .  'p.`publish`, p.`updated`, u.`name` FROM post p '
-            .  'LEFT JOIN user u ON u.`user_id` = p.`user_id` '
+            .  'p.`publish`, p.`updated`, u.`name` FROM spb_article p '
+            .  'LEFT JOIN spb_user u ON u.`user_id` = p.`user_id` '
             .  'WHERE `post_id` = ?';
         $data = self::createQuery($sql, [$id]);
 
