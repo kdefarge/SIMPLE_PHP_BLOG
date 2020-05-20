@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1 class="mt-4">{{ post.GetTitle() }}</h1>
+<h2 class="mt-4">{{ post.GetTitle() }}</h1>
 
 {% if post.GetUser().GetName() %}
     <p class="lead"> par {{ post.GetUser().GetName() }} </p>
