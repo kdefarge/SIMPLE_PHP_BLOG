@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/?page=home">Home</a>
+                        <a class="nav-link" href="/?page=home">Accueil</a>
                     </li>
 
                     {% if userLogged %}
@@ -92,56 +92,22 @@
 
                 {% endif %}
 
-                <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
+                <div class="card my-4 text-center">
+                    <img src="public/images/me.png" class="card-img-top" alt="me">
+                    <h5 class="card-header">Kévin DEFARGE</h5>
                     <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button">Go!</button>
-                            </span>
-                        </div>
+                        <p class="card-text h6">
+                            Réfléchi et curieux, deux de mes principaux traits de caractère qui me permettent d'apporter, à tout problème, des solutions originales.
+                        </p>
+                        <a href="public/pdf/cv.pdf" class="btn btn-primary">Mon CV</a>
                     </div>
                 </div>
 
                 <div class="card my-4">
-                    <h5 class="card-header">Categories</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">Web Design</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">HTML</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Freebies</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">JavaScript</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">CSS</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tutorials</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                        You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                    <h5 class="card-header">Mes médias sociaux</h5>
+                    <img src="public/images/GitHub_Logo.png" class="card-img-top" alt="me">
+                    <div class="card-body text-center">
+                        <a href="https://github.com/kdefarge/" class="btn btn-primary">Mon GitHub</a>
                     </div>
                 </div>
 
