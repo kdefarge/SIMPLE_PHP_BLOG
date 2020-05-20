@@ -1,29 +1,27 @@
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS spb_user (
   `user_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(32) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `registered` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_admin` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`),
-  UNIQUE INDEX (`name`))
-ENGINE = InnoDB;
+  UNIQUE INDEX (`name`)
+) ENGINE = InnoDB AUTO_INCREMENT=2;
 
-CREATE TABLE IF NOT EXISTS `post` (
+CREATE TABLE IF NOT EXISTS spb_article (
   `post_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT DEFAULT NULL,
   `title` VARCHAR(45) NOT NULL,
   `header` TEXT NULL DEFAULT NULL,
   `content` TEXT NULL DEFAULT NULL,
   `publish` DATETIME NULL DEFAULT NULL,
-  `updated` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`post_id`),
   INDEX (`user_id`),
-  FOREIGN KEY (`user_id`)
-    REFERENCES  `user`(`user_id`)
-    ON DELETE SET NULL ON UPDATE CASCADE)
-ENGINE = InnoDB;
+  FOREIGN KEY (`user_id`) REFERENCES spb_user(`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `comment` (
+CREATE TABLE IF NOT EXISTS spb_comment (
   `comment_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT,
   `post_id` INT NOT NULL,
@@ -33,12 +31,9 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`comment_id`),
   INDEX (`user_id`),
   INDEX (`post_id`),
-  CONSTRAINT `fk_comment_user1`
-    FOREIGN KEY (`user_id`)
-    REFERENCES  `user`(`user_id`)
-    ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `fk_comment_post1`
-    FOREIGN KEY (`post_id`)
-    REFERENCES  `post`(`post_id`)
-    ON DELETE CASCADE ON UPDATE CASCADE)
-ENGINE = InnoDB;
+  FOREIGN KEY (`user_id`) REFERENCES spb_user(`user_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  FOREIGN KEY (`post_id`) REFERENCES spb_article(`post_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB;
+
+INSERT INTO `spb_user` (`user_id`, `name`, `password`, `is_admin`) VALUES
+(1, 'admin', '$2y$10$jmaf0P1FSIAkChy3A6uPHuFy4PEG8lmBlFkJQhkUiS9rW5dMo56r2', 1);
