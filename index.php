@@ -31,6 +31,6 @@ $routing = [
 
 session_start();
 
-app\model\Controller::Run($routing, 'Home');
+new app\model\Router($routing, 'Home');
 
 ?>

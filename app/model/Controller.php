@@ -18,24 +18,6 @@ abstract class Controller
         $this->Redirect();
     }
 
-    public static function Run(array $routing, string $default) : void
-    {
-        $controllerName = $default;
-        
-        $superglobal = new Superglobal();
-
-        $pageName = $superglobal->get_string_sanitize_deep('page');
-
-        if($pageName !== null) {
-            $pageName = strtolower($pageName);
-            if(array_key_exists($pageName, $routing))
-                $controllerName = $routing[$pageName];
-        }
-        
-        $class = "\\app\\controller\\$controllerName";
-        (new $class())->Running($controllerName);
-    }
-
     public function Running(string $controllerName) : void
     {
         if(count($_POST) > 0)
