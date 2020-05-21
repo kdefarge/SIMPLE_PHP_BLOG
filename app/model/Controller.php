@@ -11,6 +11,18 @@ abstract class Controller
     private ?string $_templateName = null;
     private array $_templateContext = [];
 
+    private Core $core;
+
+    public function set_core(Core $core) : void
+    {
+        $this->core = $core;
+    }
+
+    public function get_core() : Core
+    {
+        return $this->core;
+    }
+
     abstract protected function MethodGet() : void;
 
     protected function MethodPost() : void

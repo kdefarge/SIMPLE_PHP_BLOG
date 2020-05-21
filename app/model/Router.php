@@ -8,9 +8,9 @@ class Router
     {
         $controllerName = $default;
         
-        $superglobal = new Superglobal();
+        $core = new Core();
 
-        $pageName = $superglobal->get_string_sanitize_deep('page');
+        $pageName = $core->get_superglobal()->get_string_sanitize_deep('page');
 
         if($pageName !== null) {
             $pageName = strtolower($pageName);
@@ -19,7 +19,13 @@ class Router
         }
         
         $class = "\\app\\controller\\$controllerName";
-        (new $class())->Running($controllerName);
+
+        $controller = new $class();
+
+        $core->set_controller($controller);
+
+        $controller->set_core($core);
+        $controller->Running($controllerName);
     }
 }
 
