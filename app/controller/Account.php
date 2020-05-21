@@ -48,7 +48,7 @@ class Account extends Controller
         {
             if($user->GetName() != $post->name)
             {
-                if(is_null($userDAO->ReadByName($post->name)))
+                if($userDAO->ReadByName($post->name) === null)
                 {
                     $user->SetName($post->name);
                     $formValidate = true;

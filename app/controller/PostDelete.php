@@ -22,7 +22,7 @@ class PostDelete extends Controller
         $postDAO->SetUtils($utils);
 
         $post = $this->PreparePost(['postid']);
-        $postid = intval($post->postid);
+        $postid = (int)$post->postid;
         $postDAO->Delete($postid);
 
         $utils->AddInfo('Article supprimé');

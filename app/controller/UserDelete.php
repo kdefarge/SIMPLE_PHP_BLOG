@@ -25,7 +25,7 @@ class UserDelete extends Controller
         $user = $session->GetUserLogged();
 
         $post = $this->PreparePost(['userid']);
-        $userid = intval($post->userid);
+        $userid = (int)$post->userid;
         
         if($user->GetID() == $userid)
         {

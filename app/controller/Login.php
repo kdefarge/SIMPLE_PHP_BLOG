@@ -25,7 +25,7 @@ class Login extends Controller
             $userDAO->SetUtils($userUtils);
 
             $user = $userDAO->ReadByName($post->name);
-            if(!is_null($user))
+            if($user !== null)
             {
                 if($userUtils->UserPasswordVerify($user, $post->password))
                 {

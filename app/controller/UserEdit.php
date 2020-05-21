@@ -32,7 +32,7 @@ class UserEdit extends Controller
 
         $user = is_numeric($post->userid)?$userDAO->ReadByID($post->userid):null;
 
-        if(is_null($user))
+        if($user === null)
         {
             $userUtils->AddError('Cette utilisateur n\'existe pas');
             $this->Redirect('userlist');
@@ -54,7 +54,7 @@ class UserEdit extends Controller
         {
             if($user->GetName() != $post->name)
             {
-                if(is_null($userDAO->ReadByName($post->name)))
+                if($userDAO->ReadByName($post->name) === null)
                 {
                     $user->SetName($post->name);
                     $formValidate = true;
@@ -105,7 +105,7 @@ class UserEdit extends Controller
         $get = $this->PrepareGet(['id']);
         $user = $userDAO->ReadByID($get->id);
 
-        if(!is_null($user))
+        if($user !== null)
             $this->TemplateAddContext('user', $user);
     }
 }

@@ -29,7 +29,7 @@ class PostEdit extends Controller
         
         $post = is_numeric($p->postid)?$postDAO->ReadByID($p->postid):null;
 
-        if(is_null($post))
+        if($post === null)
         {
             $utils->AddError('Cette article n\'existe pas');
             $this->Redirect('postlist');
@@ -77,7 +77,7 @@ class PostEdit extends Controller
         $get = $this->PrepareGet(['id']);
         $post = $postDAO->ReadByID($get->id);
 
-        if(is_null($post))
+        if($post === null)
         {
             $utils->EnableAlert_Redirect($session);
             $utils->AddError('Cette article n\'existe pas');

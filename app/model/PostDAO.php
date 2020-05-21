@@ -13,11 +13,11 @@ class PostDAO extends DAO
             .  ' VALUES (?, ?, ?, ?, ?)';
 
         self::createQuery($sql, [
-                is_null($post->GetUser())?null:$post->GetUser()->GetID(),
+                $post->GetUser() === null ? null : $post->GetUser()->GetID(),
                 $post->GetTitle(),
                 $post->GetHeader(),
                 $post->GetContent(),
-                is_null($post->GetPublish())?null:$post->GetPublish()->format('Y-m-d H:i:s')
+                $post->GetPublish() === null ? null : $post->GetPublish()->format('Y-m-d H:i:s')
             ]);
     }
 
@@ -28,11 +28,11 @@ class PostDAO extends DAO
             .  ' WHERE `post_id` = ?';
 
         self::createQuery($sql, [
-                is_null($post->GetUser())?null:$post->GetUser()->GetID(),
+                $post->GetUser() === null ? null : $post->GetUser()->GetID(),
                 $post->GetTitle(),
                 $post->GetHeader(),
                 $post->GetContent(),
-                is_null($post->GetPublish())?null:$post->GetPublish()->format('Y-m-d H:i:s'),
+                $post->GetPublish() === null ? null : $post->GetPublish()->format('Y-m-d H:i:s'),
                 $post->GetID()
             ]);
     }
@@ -78,7 +78,7 @@ class PostDAO extends DAO
 
     private function DataArrayToPost(array $array) : Post
     {
-        if(is_null($array['user_id']))
+        if($array['user_id'] === null)
         {
             $user = null;
         }
@@ -97,7 +97,7 @@ class PostDAO extends DAO
         $post->SetContent(          $array['content']       );
         $post->SetUpdatedString(    $array['updated']       );
 
-        if(!is_null($array['publish']))
+        if($array['publish'] !== null)
             $post->SetPublishString($array['publish']);
         
         return $post;

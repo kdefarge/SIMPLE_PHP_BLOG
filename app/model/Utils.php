@@ -49,11 +49,11 @@ class Utils
 
     public function AddAlert(Alert $alert) : void
     {
-        if(!is_null($this->_session))
+        if($this->_session !== null)
         {
             $this->_session->AddAlert($alert);
         }
-        elseif(!is_null($this->_controller))
+        elseif($this->_controller !== null)
         {
             $this->_controller->AddAlert($alert);
         }
@@ -61,11 +61,11 @@ class Utils
 
     public function Die(string $text) : void
     {
-        if(!is_null($this->_session))
+        if($this->_session !== null)
         {
             $this->_session->GetController()->Die(new Alert($text));
         }
-        elseif(!is_null($this->_controller))
+        elseif($this->_controller !== null)
         {            
             $this->_controller->Die(new Alert($text));
         }
