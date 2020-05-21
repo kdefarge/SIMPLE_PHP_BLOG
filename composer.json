@@ -3,8 +3,7 @@
     "name": "kdefarge/simple_php_blog",
     "type": "project",
     "require": {
-        "twbs/bootstrap": "v4.4.1",
-        "twig/twig": "v3.0.3"
+        "twig/twig": "3.0.3"
     },
     "license": "GPL-3.0",
     "authors": [
@@ -15,8 +14,7 @@
     ],
     "scripts": {
         "post-install-cmd": [
-            "sass sass:public/css/ --style=compressed --no-source-map",
-            "php composer_install_script.php"
+            "sass sass:public/css/ --style=compressed --no-source-map"
         ]
     },
     "autoload": {

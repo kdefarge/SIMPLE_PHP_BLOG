@@ -2,11 +2,12 @@
 
 /**
  * load composer dependency :
- * - Bootstrap v4.4.1
  * - Twig v3.0.3
  */
 
-require "vendor/autoload.php";
+require_once "vendor/autoload.php";
+
+$CONFIGS = include('config.php');
 
 $routing = [
     'admin' => 'Routing',
