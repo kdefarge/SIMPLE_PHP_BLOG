@@ -24,7 +24,7 @@ abstract class Controller
         
         $superglobal = new Superglobal();
 
-        $pageName = $superglobal->get_string_sanitize('page');
+        $pageName = $superglobal->get_string_sanitize_deep('page');
 
         if($pageName !== null) {
             $pageName = strtolower($pageName);
