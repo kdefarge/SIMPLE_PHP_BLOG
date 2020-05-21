@@ -20,6 +20,8 @@
 
 <hr>
 
+{% if userLogged %}
+
 <div class="card my-4">
     <h5 class="card-header" id="comment_section">Publié un commentaire :</h5>
     <div class="card-body">
@@ -33,6 +35,19 @@
         </form>
     </div>
 </div>
+
+{% else %}
+
+<div class="card my-4">
+    <h5 class="card-header" id="comment_section">Publié un commentaire :</h5>
+    <div class="card-body text-center">
+        {{ include('alert.html') }}
+        <a href="/?page=register" class="btn btn-primary">S'enregistrer</a> ou 
+        <a href="/?page=login" class="btn btn-primary">Se connecter</a>
+    </div>
+</div>
+
+{% endif %}
 
 {% if userLogged and userLogged.GetIsAdmin() %}
     {% for comment in comments %}
@@ -64,6 +79,19 @@
                 {% if userLogged.GetID() == comment.GetUser().GetID() %}
                     <small><a href="?page=commentdelete&id={{ comment.GetID() }}">supprimer</a></small>
                 {% endif %}
+            </h6>
+            <p class="text-break">{{ comment.GetText()|nl2br }}</p>
+        </div>
+    </div>
+    <hr>
+    {% elseif userLogged.GetID() == comment.GetUser().GetID() %}
+    <div class="media mb-4 sml-bg-red">
+        <div class="media-body">
+            <h6 class="mt-0">
+                <small>Par</small>
+                {{ comment.GetUser().GetName() }}
+                <small><i>le {{ comment.GetPosted()|date('d/m/y à H\\Hi') }}</i></small>
+                <small><a href="?page=commentdelete&id={{ comment.GetID() }}">supprimer</a> (En attente de validation)</small>
             </h6>
             <p class="text-break">{{ comment.GetText()|nl2br }}</p>
         </div>

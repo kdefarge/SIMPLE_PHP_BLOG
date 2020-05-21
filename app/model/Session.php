@@ -9,7 +9,6 @@ class Session
 
     function __construct(Controller $controller)
     {
-        session_start();
         $this->_controller = $controller;
 
         if(isset($_SESSION['user']))
