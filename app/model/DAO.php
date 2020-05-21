@@ -12,11 +12,7 @@ $DAO_LINK = null;
 $DAO_QUERY_COUNTER = 0;
 
 abstract class DAO
-{
-    const DB_HOST = 'mysql:host=localhost;dbname=blog;charset=utf8';
-    const DB_USER = 'root';
-    const DB_PASS = '';
-    
+{    
     private ?Utils $_Utils = null;
 
     public function SetUtils(Utils $Utils) : void
@@ -43,10 +39,11 @@ abstract class DAO
     private function getConnection() : ?PDO
     {
         global $DAO_LINK;
+        global $CONFIGS;
 
         try
         {
-            $DAO_LINK = new PDO(self::DB_HOST, self::DB_USER, self::DB_PASS);
+            $DAO_LINK = new PDO($CONFIGS->host, $CONFIGS->username, $CONFIGS->password);
             $DAO_LINK->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $DAO_LINK;
         }
