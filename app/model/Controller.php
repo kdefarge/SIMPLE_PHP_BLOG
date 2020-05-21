@@ -21,10 +21,11 @@ abstract class Controller
     public static function Run(array $routing, string $default) : void
     {
         $controllerName = $default;
+        
+        $pageName = Superglobal::get_string_sanitize('page');
 
-        if(isset($_GET['page']))
-        {
-            $pageName = strtolower($_GET['page']);
+        if($pageName !== null) {
+            $pageName = strtolower($pageName);
             if(array_key_exists($pageName, $routing))
                 $controllerName = $routing[$pageName];
         }
