@@ -35,7 +35,7 @@ class Session
 
     public function SetUserLogged(?User $user) : void
     {
-        if(is_null($user))
+        if($user === null)
             unset($_SESSION['user']);
         else
             $_SESSION['user'] = serialize($user);
@@ -73,7 +73,7 @@ class Session
 
     public function RedirectConnected(string $page = 'home') : void
     {
-        if(is_null($this->_user))
+        if($this->_user === null)
             return;
         
         $this->AddAlert(new Alert('Vous ne pouvez pas acceder à cette page en étant connecté'));
@@ -82,7 +82,7 @@ class Session
 
     public function RedirectGuest(string $page = 'home') : void
     {
-        if(!is_null($this->_user))
+        if($this->_user !== null)
             return;
         
         $this->AddAlert(new Alert('Identification nécessaire'));
@@ -91,7 +91,7 @@ class Session
 
     public function RedirectNoAdmin(string $page = 'home') : void
     {
-        if(!is_null($this->_user) && $this->_user->GetIsAdmin())
+        if($this->_user !== null && $this->_user->GetIsAdmin())
             return;
         
         $this->AddAlert(new Alert('Vous ne pouvez pas acceder à cette page', ));

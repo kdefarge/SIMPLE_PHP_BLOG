@@ -25,7 +25,7 @@ class CommentDelete extends Controller
         $commentDAO->SetUtils($utils);
         $comment = $commentDAO->ReadByID($get->id);
 
-        if(is_null($comment))
+        if($comment === null)
         {
             $utils->AddError('Ce commentaire est introuvable');
             $this->Redirect('home');

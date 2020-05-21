@@ -50,7 +50,7 @@ class PostRead extends Controller
 
         $user = $userDAO->ReadByID($session->GetUserLogged()->GetID());
         
-        if(is_null($user))
+        if($user === null)
         {
             $session->SetUserLogged(null);
             $utils->AddError('Compte supprimé');
@@ -63,7 +63,7 @@ class PostRead extends Controller
 
         $post = is_numeric($p->postid)?$postDAO->ReadByID($p->postid):null;
 
-        if(is_null($post))
+        if($post === null)
         {
             $utils->AddError('Cette article n\'existe pas');
             $this->Redirect();
@@ -106,13 +106,13 @@ class PostRead extends Controller
 
         $post = $postDAO->ReadByID($get->id);
 
-        if(is_null($post))
+        if($post === null)
         {
             $utils->AddError('Cette article n\'existe pas');
             $this->Redirect('home');
         }
 
-        if(is_null($post->GetPublish()) || $post->GetPublish() > new DateTime("now"))
+        if($post->GetPublish() === null || $post->GetPublish() > new DateTime("now"))
         {
             $utils->AddError('Cette article n\'est pas accessible');
             $this->Redirect('home');

@@ -71,7 +71,7 @@ class CommentDAO extends DAO
 
     private function DataArrayToComment(array $array) : Comment
     {
-        if(is_null($array['user_id']))
+        if($array['user_id'] === null)
         {
             $user = null;
         }

@@ -44,7 +44,7 @@ abstract class Controller
             $this->MethodGet();
         }
 
-        $this->_templateName = is_null($this->_templateName)?
+        $this->_templateName = $this->_templateName === null?
             $controllerName:$this->_templateName;
             
         $this->Template($this->_templateName);
@@ -101,7 +101,7 @@ abstract class Controller
         if(!isset($context['pagename']))
             $context['pagename'] = $this->_templateName;
 
-        if(!is_null($this->_userLogged))
+        if($this->_userLogged !== null)
             $context['userLogged'] = $this->_userLogged;
 
         if(count($this->_alerts) > 0)
@@ -112,7 +112,7 @@ abstract class Controller
 
     public function Die(?Alert $alert = null) : void
     {
-        if(!is_null($alert))
+        if($alert !== null)
             $this->_alerts[] = $alert;
         $this->Template('base', ['alerts' => $this->_alerts]);
         die();

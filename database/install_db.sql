@@ -35,5 +35,5 @@ CREATE TABLE IF NOT EXISTS spb_comment (
   FOREIGN KEY (`post_id`) REFERENCES spb_article(`post_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB;
 
-INSERT INTO `spb_user` (`user_id`, `name`, `password`, `is_admin`) VALUES
+INSERT INTO spb_user (`user_id`, `name`, `password`, `is_admin`) VALUES
 (1, 'admin', '$2y$10$jmaf0P1FSIAkChy3A6uPHuFy4PEG8lmBlFkJQhkUiS9rW5dMo56r2', 1);
