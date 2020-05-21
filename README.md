@@ -1,4 +1,4 @@
-# SIMPLE PHP BLOG
+# SIMPLE PHP BLOG [![Codacy Badge](https://app.codacy.com/project/badge/Grade/24b84b46fa3d4eb4baf369824800dbc0)](https://www.codacy.com/manual/kdefarge/SIMPLE_PHP_BLOG?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kdefarge/SIMPLE_PHP_BLOG&amp;utm_campaign=Badge_Grade)
 
 My professional blog
 
