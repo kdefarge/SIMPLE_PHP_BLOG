@@ -4,20 +4,30 @@ namespace app\model;
 
 class Superglobal
 {
-    public static function get_string_sanitize(string $key) : ?string
-    {
-        if(!isset($_GET[$key]))
-            return null;
-        
-        return filter_var($_GET[$key], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+    public array $session;
+    public array $get;
+    public array $post;
+
+    public function __construct() {
+        $this->session = &$_SESSION;
+        $this->get = &$_GET;
+        $this->post = &$_POST;
     }
 
-    public static function post_string_sanitize($key) : ?string
+    public function get_string_sanitize(string $key) : ?string
     {
-        if(!isset($_POST[$key]))
+        if(!isset($this->get[$key]))
+            return null;
+        
+        return filter_var($this->get[$key], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+    }
+
+    public function post_string_sanitize($key) : ?string
+    {
+        if(!isset($this->post[$key]))
             return null;
     
-        return filter_var($_POST[$key], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
+        return filter_var($this->post[$key], FILTER_SANITIZE_STRING, FILTER_FLAG_EMPTY_STRING_NULL);
     }
 }
 

@@ -22,7 +22,9 @@ abstract class Controller
     {
         $controllerName = $default;
         
-        $pageName = Superglobal::get_string_sanitize('page');
+        $superglobal = new Superglobal();
+
+        $pageName = $superglobal->get_string_sanitize('page');
 
         if($pageName !== null) {
             $pageName = strtolower($pageName);

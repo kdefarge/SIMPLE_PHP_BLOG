@@ -29,6 +29,8 @@ $routing = [
     'generator' => 'Generator'
 ];
 
+session_start();
+
 app\model\Controller::Run($routing, 'Home');
 
 ?>
