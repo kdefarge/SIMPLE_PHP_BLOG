@@ -7,7 +7,7 @@
 
 require_once "vendor/autoload.php";
 
-$CONFIGS = include('config.php');
+$CONFIGS = include 'config.php';
 
 $routing = [
     'admin' => 'Routing',

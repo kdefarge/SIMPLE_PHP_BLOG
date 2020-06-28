@@ -6,10 +6,14 @@ use app\model\Controller;
 use app\model\Utils;
 use app\model\Session;
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 class Contact extends Controller
 {
-    const EMAIL_NOREPLY = '';
-    const EMAIL_TO = '';
+    const EMAIL_NOREPLY = 'noreply@localhost';
+    const EMAIL_TO = 'email';
 
     protected function MethodPost() : void
     {
@@ -35,17 +39,9 @@ class Contact extends Controller
             $valide = false;
 
         if($valide)
-        {                        
-            $headers = array(
-                'From' => self::EMAIL_NOREPLY,
-                'Reply-To' => $p->email,
-                'X-Mailer' => 'PHP/' . phpversion()
-            );
-            $message = wordwrap($p->message, 70, "\r\n");
-            $message = $p->name."\r\n".'Formulaire de contact :'."\r\n".$message."\r\n\r\n".$p->email;
-            if(mail(self::EMAIL_TO, 'Contact de '.$p->name, $message, $headers))
-            {
-                $session =  new Session($this);
+        {
+            if($this->send($p->name,$p->email,$p->message)) {
+                $session = new Session($this);
                 $session->ClearAlert();
                 $utils->EnableAlert_Redirect($session);
                 $utils->AddValide('Votre message de contact a bien été envoyé !');
@@ -61,6 +57,35 @@ class Contact extends Controller
     {
         $session = new Session($this);
         $session->ShowAllAlertAndClear();
+    }
+
+    private function send(string $name, string $email, string $message) : bool
+    {
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'host smtp';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'identifiant';                     // SMTP username
+            $mail->Password   = 'mot de passe';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 465;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            $mail->CharSet = 'UTF-8';
+            
+            //Recipients
+            $mail->setFrom('adresse mail', 'NoReply');
+            $mail->addAddress('email', 'prénom nom');     // Add a recipient
+            $mail->addReplyTo($email, $name);
+            // Content
+            $mail->Subject = 'Contact de '.$name;
+            $mail->Body = 'Formulaire de contact :'."\r\n".$message."\r\n\r\n".$email;
+
+            $mail->send();
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }
 
