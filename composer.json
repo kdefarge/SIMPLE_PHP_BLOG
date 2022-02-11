@@ -3,7 +3,7 @@
     "name": "kdefarge/simple_php_blog",
     "type": "project",
     "require": {
-        "twig/twig": "3.0.3"
+        "twig/twig": "3.3.8"
     },
     "license": "GPL-3.0",
     "authors": [
